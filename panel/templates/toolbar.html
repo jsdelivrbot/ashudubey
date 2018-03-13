@@ -1,0 +1,26 @@
+<div Layout="column">
+    <md-toolbar md-whiteframe="4" class="maintoolbar" layout="row" layout-align="center center">
+        <a ui-sref="app.home" style="text-decoration:none;margin:9px;color:white">
+            <p5>IT HELP</p5>
+            <p6 hide-xs>DESK</p6>
+        </a>
+        <span flex=""></span>
+        <div layout="row" layout-align="center center" style="width:30%;min-width: 150px;">
+            <i class="ion-android-call" style="font-size:18px;padding-right:3%"></i>
+            <p1 style="font-size:15px;">011-40655600 / 40655700</p1>
+        </div>
+        <i class="ion-android-home" style="font-size:30px;padding-left:2%;outline:none;cursor:pointer"
+           ng-click="ChangeRoute('home')"></i>
+        <span flex="5"></span>
+        <div layout="row" layout-align="center center" hide-xs>
+            <md-button ng-if="user==null" class="md-button md-raised md-primary" ng-click="OnLogIN()">Login</md-button>
+            <div ng-if="user!=null" layout="row">
+                <h5>{{user.name}}</h5>
+                <md-button  class="md-button md-raised md-primary" ng-click="LogOut()">
+                    LogOut
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+    <div class="mainContent" ui-view='mainContent'></div>
+</div>

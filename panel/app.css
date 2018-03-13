@@ -1,0 +1,324 @@
+@font-face {
+    font-family: "Azoft";
+    src: url(./components/font/ABeeZee-Regular.ttf);
+}
+
+* {
+    outline: none;
+    font-family: Azoft;
+}
+
+h2 {
+    color: darkcyan;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+}
+
+p9 {
+    padding: 2px;
+}
+
+p1 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.subheading {
+    background-color: lightblue;
+}
+
+p2 {
+    font-size: 16px;
+    background-color: lightgrey;
+}
+
+p5 {
+    color: white;
+}
+
+html {
+    overflow: hidden !important;
+}
+
+body {
+    overflow: hidden !important;
+}
+
+md-select.md-default-theme .md-select-value.md-select-placeholder, md-select .md-select-value.md-select-placeholder {
+    color: black;
+}
+
+md-input-container label:not(.md-container-ignore) {
+    color: black;
+}
+
+md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: black;
+}
+
+md-content {
+    /*background-color: #f3f3f3;*/
+}
+
+#loginpage {
+    padding: 1%;
+    width: 27%;
+    height: 43%;
+    min-width: 282px;
+    min-height: 261px;
+    overflow: hidden;
+    border-radius: 5%
+}
+
+#container {
+    width: 100%;
+    min-width: 250px;
+}
+
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
+    background-color: darkcyan;
+}
+
+md-input-container.md-block {
+    width: 81%;
+    min-width: 250px;
+    font-size: 14px;
+}
+
+md-input-container .md-errors-spacer {
+    display: none;
+}
+
+md-input-container .md-input:focus {
+    border-bottom-width: 1px !important;
+    border-bottom-color: darkcyan !important;
+}
+
+.md-input-focused label {
+    color: darkcyan !important;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+    color: grey;
+    border-bottom: 1px solid grey;
+}
+
+md-input-container label:not(.md-container-ignore) {
+    color: grey;
+}
+
+md-fab-speed-dial {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+}
+
+.fab-icon {
+    font-size: 25px;
+
+}
+
+.formPage {
+    margin: 2%;
+}
+
+.md-title {
+    text-align: center;
+}
+
+.dropdown_menu {
+    width: 20%;
+    min-width: 220px;
+}
+
+.input_container {
+    width: 61%;
+    min-width: 250px;
+}
+
+.md-datepicker-input {
+    margin-left: -9px;
+    min-width: 237px;
+    max-width: 328px;
+}
+
+._md-datepicker-floating-label > md-datepicker .md-datepicker-button {
+    display: none;
+}
+
+._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
+    right: 81px;
+}
+
+md-select.md-default-theme .md-select-value, md-select .md-select-value {
+    border-bottom-color: grey;
+}
+
+.maintoolbar {
+    background-color: #1C2B36 !important;
+    max-height: 50px;
+    position: relative;
+}
+
+.md-sidenav-left, md-sidenav {
+    width: 15.5%;
+    min-width: 180px;
+    background-color: #1C2B36 !important;
+    position: relative;
+}
+
+li {
+    /*padding: 10px;*/
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+li:hover {
+    text-decoration: underline;
+}
+
+.leftMenuIcon {
+    margin-right: 10px;
+}
+
+.mainContent {
+    height: 90vh;
+    overflow-y: auto;
+}
+
+#main_route {
+    width: 250px;
+    min-width: 225px;
+    height: 120px;
+    min-height: 134px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5%;
+}
+
+.mainIcon {
+    font-size: 70px;
+    color: grey;
+}
+
+.clicked {
+    color: red;
+}
+
+.nav {
+    cursor: pointer;
+}
+
+.filter_with_side_menu {
+    margin-left: 1%;
+}
+
+#MyTable {
+    width: 90%;
+    margin: 12px;
+}
+#MyTable, th{
+    font-size: 15px;
+    border-bottom: 1px solid lightgrey;
+    text-align: center;
+    cursor: pointer;
+    padding: 12px;
+}
+#MyTable,
+
+tr:nth-child(odd) {background-color: #f2f2f2;}
+
+#MyTable, td {
+    border-bottom: 1px solid lightgrey;
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+    padding:12px;
+}
+
+.filterBtn {
+    height: 36px;
+    margin-top: 27px;
+    padding: 0px;
+}
+
+.Loader {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+.loadMoreButton {
+    font-size: 11px;
+    height: 25px;
+    line-height: 12px;
+    max-height: 25px;
+    min-height: 12px;
+    text-align: center;
+}
+
+.activeState {
+    background-color: darkcyan;
+}
+
+.alertify .ajs-header {
+    display: none;
+}
+
+.alertify .ajs-dialog {
+    top: 21%;
+}
+
+.alertify .ajs-header {
+    display: none;
+}
+
+.alertify .ajs-body {
+    padding-left: 21%;
+    padding-top: 3%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+md-dialog {
+    width: 45%;
+    min-width: 270px;
+    color: white;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+    color: black;;
+    border-bottom: 1px solid black;
+}
+
+md-select.md-default-theme .md-select-value, md-select .md-select-value {
+    border-bottom-color: black;
+}
+
+._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
+    right: 75px;
+}
+
+md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder {
+    margin-left: 5px;
+}
+
+.md-button._md-nav-button{
+  padding: 0px
+}
+.md-nav-bar {
+  border-style: none;
+  margin-top: 12px
+}
+.md-nav-item:first-of-type {
+    margin-left: 18px;
+}
