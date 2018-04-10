@@ -39,12 +39,48 @@ app.get(path('getting_dropdown_data/'), function (req, res) {
     })
 })
 
+//Seprate Api for Getting Problem Type & User Type
+app.get(path('get_problem_type/'), function (req, res) {
 
-var sendNotificationSMS = function (args, callback) {
+    db.mdb.collection('problem_type').find({}, function (err, result) {
+        if (err) {
+            app.sendError(req, res, err);
+        }
+        else {
+            console.log(result[0]);
+            app.send(req, res, result);
+        }
 
-    var msg = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
+    })
 
-    var url = 'http://shorteksms.shortekservices.com/pushsms.php?username=innosols&password=hitech8*&message=' + msg + '&sender=INOSLS&numbers=' + args.mobile;
+})
+
+app.get(path('get_user_type/'), function (req, res) {
+
+    db.mdb.collection('user_type').find({}, function (err, result1) {
+        if (err) {
+            app.sendError(req, res, err);
+        } else {
+            console.log(result1);
+            app.send(req, res, result1);
+        }
+
+    })
+})
+
+
+var sendNotificationSMS = function (args, type, callback) {
+
+    var TicketMsg = '';
+    if (type === 'new') {
+        TicketMsg = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
+    }
+    else {
+        TicketMsg = "The Status Of Your ticket no. " + args.ticket_number + " has been changed to " + args.status;
+    }
+
+
+    var url = 'http://shorteksms.shortekservices.com/pushsms.php?username=innosols&password=hitech8*&message=' + TicketMsg + '&sender=INOSLS&numbers=' + args.mobile;
 
     request({
         uri: url,
@@ -79,7 +115,7 @@ var function_for_add_forms_data = function (req, res) {
         if (!err) {
             var html = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
             mailer.send_mail('Raised Ticket Number', html, args.email, CC_MAIL, function () {
-                sendNotificationSMS(args, function (data) {
+                sendNotificationSMS(args, 'new', function (data) {
                     app.send(req, res, data);
                 })
             });
@@ -127,20 +163,83 @@ app.get(path('get_raised_ticket_report/'), function (req, res) {
 });
 
 
-app.put(path('change_status/'), function (req, res) {
-    var query = {"_id":objectid(req.query.id)};
+app.post(path('change_status/'), function (req, res) {
+    var args = req.body;
+    var query = {"_id": objectid(args._id)};
     db.mdb.collection('tickets').update(query,
-        {$set: {'status':req.query.status }}, function (err, data) {
+        {$set: {'status':args.status}}, function (err, data) {
             if (!err) {
-                console.log(data);
-                app.send(req,res,data);
-            }else{
-                app.sendError(req,res,'Something Went Wrong',err);
+                var html = "The Status Of Your ticket no. " + args.ticket_number + " has been changed to " + args.status;
+                mailer.send_mail('Status Of Your Ticket Number', html, args.email, CC_MAIL, function () {
+                    sendNotificationSMS(args, 'update', function (data) {
+                        app.send(req, res, data);
+                    })
+                });
+            } else {
+                app.sendError(req, res, 'Something Went Wrong', err);
             }
 
 
         });
 });
+
+app.put(path('update_problem_type/'), function (req, res) {
+    var query = {"_id": objectid(req.query.id)};
+    var name = req.query.name.toLowerCase();
+    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var id = name;
+    db.mdb.collection('problem_type').update(query,
+        {$set: {id: id, name: name1}}, function (err, data) {
+            if (!err) {
+                console.log(data);
+                app.send(req, res, data);
+            } else {
+                app.sendError(req, res, 'Something Went Wrong', err);
+            }
+
+
+        });
+
+});
+
+app.put(path('update_user_type/'), function (req, res) {
+    var query = {"_id": objectid(req.query.id)};
+    var name = req.query.name.toLowerCase();
+    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var id = name;
+    db.mdb.collection('user_type').update(query,
+        {$set: {id: id, name: name1}}, function (err, result) {
+
+            if (!err) {
+                console.log(result);
+                app.send(req, res, result);
+            } else {
+                app.sendError(req, res, 'Please try later', err)
+            }
+
+        });
+
+})
+
+
+app.post(path('add_new_user_type/'), function (req, res) {
+
+    var name = req.query.name.toLowerCase();
+    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var obj = {id: name, name: name1};
+    console.log(obj);
+
+    db.mdb.collection('user_type').insert(obj, function (err, data) {
+        if (!err) {
+            app.send(req, res, data);
+        } else {
+            app.sendError(req, res, 'Something Went Wrong', err)
+        }
+    });
+
+
+})
+
 
 
 

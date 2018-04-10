@@ -91,7 +91,7 @@ app.factory('Auth', function ($http, apiSrv, $rootScope) {
 });
 
 app.factory('apiSrv', function ($location) {
-    const url = $location.protocol() + '://' + $location.host() + ':8091';
+    const url = $location.protocol() + '://' + $location.host() + ':8094';
     var obj = this;
     this.path = function (p) {
         console.log('i am hitting '+p)
@@ -104,6 +104,38 @@ app.service('CommonData', function ($http, apiSrv) {
 
     this.get_dropdown_data = function (callback) {
         $http.get(apiSrv.path('/api/tickets/getting_dropdown_data/')).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+        })
+    };
+
+    this.view_problem_type = function (callback) {
+        $http.get(apiSrv.path('/api/tickets/get_problem_type/')).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+        })
+    };
+
+    this.view_user_type = function (callback) {
+        $http.get(apiSrv.path('/api/tickets/get_user_type/')).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -173,8 +205,8 @@ app.service('CommonData', function ($http, apiSrv) {
     };
 
 
-    this.update_data = function (id,status, callback) {
-        $http.put(apiSrv.path('/api/tickets/change_status/?id='+id + '&status=' +status)).then(function (resp) {
+    this.update_data = function (item, callback) {
+        $http.post(apiSrv.path('/api/tickets/change_status/'),item).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -192,6 +224,64 @@ app.service('CommonData', function ($http, apiSrv) {
 
 
     };
+
+    this.update_problem_type = function (id,name,callback) {
+        $http.put(apiSrv.path('/api/tickets/update_problem_type/?id='+id + '&name=' +name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+    };
+
+
+    this.update_user_type = function (id,name,callback) {
+        $http.put(apiSrv.path('/api/tickets/update_user_type/?id='+id + '&name=' +name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+    };
+
+    this.add_new_user_type = function (name, callback) {
+        $http.post(apiSrv.path('/api/tickets/add_new_user_type/?name='+ name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+    };
+
 
 
     return this;

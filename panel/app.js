@@ -8,7 +8,9 @@ var app = angular.module('app', ['ngMaterial', 'ngMessages','ngAnimate',
     'toolbar',
     'home',
     'app.raiseTicket',
-    'app.viewTicket'
+    'app.viewTicket',
+    'app.problemType',
+    'app.userType'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$locationProvider',
@@ -23,11 +25,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$loca
                 'controller': 'raiseCtrl'
             },
 
-            {'url': '/problem/type', 'state': 'app.problem', 'view': 'problem', 'controller': 'problem_Ctrl'},
+            {'url': '/problem/type', 'state': 'app.problem', 'view': 'problem', 'controller': 'problemCtrl'},
 
-            {'url': '/user/type', 'state': 'app.user', 'view': 'user', 'controller': 'user_Ctrl'},
+            {'url': '/user/type', 'state': 'app.user', 'view': 'user', 'controller': 'userCtrl'},
 
-            {'url': '/priority/type', 'state': 'app.priority', 'view': 'priority', 'controller': 'priority_Ctrl'},
+            {'url': '/priority/type', 'state': 'app.priority', 'view': 'priority', 'controller': 'priorityCtrl'},
 
             {'url': '/view/ticket', 'state': 'app.viewticket', 'view': 'view_ticket', 'controller': 'viewCtrl'}
         ];

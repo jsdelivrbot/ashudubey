@@ -16,11 +16,11 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
     };
 
     $scope.update_data = function (item) {
-        CommonData.update_data(item._id,item.status ,function (err, data) {
+        CommonData.update_data(item,function (err, data) {
             $scope.Loader = false;
             if (!err) {
-
-                alertify.alert('updated successfully') ;
+                console.log(data);
+                alertify.alert('updated successfully');
 
             }
         })
@@ -29,7 +29,7 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
     $scope.show_view = false;
     $scope.report_data = [];
 
-    $scope.showEdit=false;
+    $scope.showEdit = false;
 
     $scope.view_ticket_report = function () {
         CommonData.view_ticket_report($scope.emp.ticket_number, function (err, data) {
@@ -60,7 +60,7 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
 
 
     }
-
+    $scope.load_ticket_data();
 
 
 });

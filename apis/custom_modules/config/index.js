@@ -23,7 +23,7 @@ configs.send_mail = function (subject,html,to_mail,cc_mail,callback){
     transporter.sendMail({
         from: "info@infield.tech",
         to: to_mail,
-        // cc:cc_mail,
+        cc:cc_mail,
         subject: subject,
         html:html
     }, function (error, response) {

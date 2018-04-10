@@ -1,34 +1,37 @@
-<div layout="column" layout-xs="column" layout-align="center center" style="height: 90%;margin-left: 7%">
+<md-content layout layout-align='center center' style="height:90vh;background-image: url('../images/1.jpg');
+background-repeat:no-repeat;background-size:cover;">
+    <div layout="column" layout-xs="column" layout-align="center center" style="height: 90%;margin-left: 7%">
 
-    <div layout='row' layout-xs="column" layout-padding style="margin-right: 12%">
-        <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="!isLogined"
-             ng-click="ChangeRoute('raiseticket')" id="main_route"><h2>RAISE TICKET</h2><br/>
-            <i class="ion-ios-email-outline mainIcon" style="margin-top:-18px"></i>
-        </div>
-        <span flex></span>
-        <div md-whiteframe='9' layout="column" layout-align="center center"
-             ng-click="ChangeRoute('viewticket')" id="main_route"><h2>VIEW TICKET</h2><br/>
-            <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
-        </div>
+        <div layout='row' layout-xs="column" layout-padding style="margin-right: 12%">
+            <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="!isLogined"
+                 ng-click="ChangeRoute('raiseticket')" id="main_route"><h2>RAISE TICKET</h2><br/>
+                <i class="ion-ios-email-outline mainIcon" style="margin-top:-18px"></i>
+            </div>
+            <span flex></span>
+            <div md-whiteframe='9' layout="column" layout-align="center center"
+                 ng-click="ChangeRoute('viewticket')" id="main_route"><h2>VIEW TICKET</h2><br/>
+                <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
+            </div>
 
-        <span flex></span>
-        <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
-             ng-click="ChangeRoute('problem')" id="main_route"><h2>PROBLEM TYPE</h2><br/>
-            <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
-        </div>
+            <span flex></span>
+            <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
+                 ng-click="ChangeRoute('problem')" id="main_route"><h2>PROBLEM TYPE</h2><br/>
+                <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
+            </div>
 
-        <span flex></span>
+            <span flex></span>
 
-        <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
-             ng-click="ChangeRoute('priority')" id="main_route"><h2>PRIORITY TYPE</h2><br/>
-            <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
-        </div>
+            <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
+                 ng-click="ChangeRoute('priority')" id="main_route"><h2>PRIORITY TYPE</h2><br/>
+                <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
+            </div>
 
-        <span flex></span>
+            <span flex></span>
 
-        <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
-             ng-click="ChangeRoute('user')" id="main_route"><h2>USER TYPE</h2><br/>
-            <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
+            <div md-whiteframe='9' layout="column" layout-align="center center" ng-if="isLogined"
+                 ng-click="ChangeRoute('user')" id="main_route"><h2>USER TYPE</h2><br/>
+                <i class="ion-ios-paper mainIcon" style="margin-top:-18px"></i>
+            </div>
         </div>
     </div>
-</div>
+</md-content>

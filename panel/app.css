@@ -230,14 +230,14 @@ li:hover {
 }
 #MyTable,
 
-tr:nth-child(odd) {background-color: #f2f2f2;}
+tr:nth-child(odd) {background-color: #white;}
 
 #MyTable, td {
     border-bottom: 1px solid lightgrey;
     text-align: center;
     font-size: 13px;
     cursor: pointer;
-    padding:12px;
+    /*padding:12px;*/
 }
 
 .filterBtn {
@@ -290,9 +290,11 @@ input::-webkit-inner-spin-button {
 }
 
 md-dialog {
-    width: 45%;
-    min-width: 270px;
+    width: 30%;
+    /*min-width: 100px;*/
     color: white;
+    min-height: 350px;
+    /*min-width: 50%;*/
 }
 
 md-input-container.md-default-theme .md-input, md-input-container .md-input {

@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Type</title>
-</head>
-<body>
-<h1>User Type</h1>
-</body>
-</html>
+<div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
+
+    <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
+        ADD NEW
+    </md-button>
+
+</div>
+
+
+<div layout="column" style="padding-left: 122px" class="animated slideInLeft">
+
+    <table class="table" md-whiteframe="2" id="MyTable" ng-if="view_data.length>0">
+        <tr>
+            <th>S.No.</th>
+            <th>User Type</th>
+            <th>Action</th>
+        </tr>
+        <tbody>
+        <tr ng-repeat="item in view_data">
+            <td>{{$index+1}}</td>
+            <td ng-hide="isEdit">{{item.name}}</td>
+            <td ng-show="isEdit">
+                <md-input-container>
+                    <label>User Type</label>
+                    <input type="text" ng-model="item.name" name="name" required>
+                </md-input-container>
+            </td>
+            <td>
+                <md-button type='button' class="md-primary md-raised filterBtn" ng-hide="isEdit" ng-click="isEdit=true">
+                    Edit
+                </md-button>
+                <span ng-show="isEdit">
+                    <md-button type='button' class="md-primary md-raised filterBtn"
+                               ng-click="update_user_type(item);isEdit=false">Save</md-button><br>
+                <md-button type='button' class="md-primary md-raised filterBtn"
+                           ng-click="isEdit=false">Cancel</md-button>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
