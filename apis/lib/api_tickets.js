@@ -20,7 +20,7 @@ var CC_MAIL = ['unmukt@v5global.com'];
 
 app.get(path('getting_dropdown_data/'), function (req, res) {
 
-    db.mdb.collection('user_type').find({}, function (err, data1) {
+    db.mdb.collection('project_type').find({}, function (err, data1) {
         if (err) {
             app.sendError(req, res, err);
         }
@@ -55,9 +55,9 @@ app.get(path('get_problem_type/'), function (req, res) {
 
 })
 
-app.get(path('get_user_type/'), function (req, res) {
+app.get(path('get_project_type/'), function (req, res) {
 
-    db.mdb.collection('user_type').find({}, function (err, result1) {
+    db.mdb.collection('project_type').find({}, function (err, result1) {
         if (err) {
             app.sendError(req, res, err);
         } else {
@@ -111,6 +111,7 @@ var function_for_add_forms_data = function (req, res) {
     var rd = new Date().getTime().toString();
     args['ticket_number'] = 'TKT' + rd.substr(7);
     args['status'] = 'pending';
+    args['priority'] = '';
     db.mdb.collection('tickets').insert(args, function (err, data) {
         if (!err) {
             var html = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
@@ -183,6 +184,25 @@ app.post(path('change_status/'), function (req, res) {
         });
 });
 
+
+
+app.post(path('change_priority_type/'), function (req, res) {
+    var args = req.body;
+    var query = {"_id": objectid(args._id)};
+    db.mdb.collection('tickets').update(query,
+        {$set: {'priority':args.priority}}, function (err, data) {
+            if (!err) {
+               app.send(req,res,data);
+            } else {
+                app.sendError(req, res, 'Something Went Wrong', err);
+            }
+
+
+        });
+});
+
+
+
 app.put(path('update_problem_type/'), function (req, res) {
     var query = {"_id": objectid(req.query.id)};
     var name = req.query.name.toLowerCase();
@@ -202,7 +222,7 @@ app.put(path('update_problem_type/'), function (req, res) {
 
 });
 
-app.put(path('update_user_type/'), function (req, res) {
+app.put(path('update_project_type/'), function (req, res) {
     var query = {"_id": objectid(req.query.id)};
     var name = req.query.name.toLowerCase();
     var name1 = name[0].toUpperCase() + name.substr(1, name.length)
@@ -222,14 +242,14 @@ app.put(path('update_user_type/'), function (req, res) {
 })
 
 
-app.post(path('add_new_user_type/'), function (req, res) {
+app.post(path('add_new_project_type/'), function (req, res) {
 
     var name = req.query.name.toLowerCase();
     var name1 = name[0].toUpperCase() + name.substr(1, name.length)
     var obj = {id: name, name: name1};
     console.log(obj);
 
-    db.mdb.collection('user_type').insert(obj, function (err, data) {
+    db.mdb.collection('project_type').insert(obj, function (err, data) {
         if (!err) {
             app.send(req, res, data);
         } else {
@@ -239,6 +259,58 @@ app.post(path('add_new_user_type/'), function (req, res) {
 
 
 })
+
+app.post(path('add_new_problem_type/'),function (req,res) {
+
+    var name = req.query.name.toLowerCase();
+    var name1 = name[0].toUpperCase()+name.substr(1,name.length)
+    var obj = {id:name, name:name1};
+
+    console.log(obj);
+
+    db.mdb.collection('problem_type').insert(obj,function (err,result) {
+       if(!err){
+           app.send(req,res,result);
+       } else{
+           app.sendError(req,res,'Please Try Again',err)
+       }
+    });
+})
+
+
+
+// function & Api for submiiting new requirement form data
+
+var new_requirement_form_data = function (req, res) {
+
+    if (req.method == 'POST') {
+        var args = req.body;
+    }
+    else {
+        var args = req.query;
+    }
+
+    if (args.mobile != undefined) {
+        args.mobile = args.mobile.toString();
+    }
+    args['date'] = new Date().getTime();
+    var rd = new Date().getTime().toString();
+    db.mdb.collection('tickets').insert(args, function (err, data) {
+        if (!err) {
+            console.log(data);
+            app.send(req, res, data);
+        }
+        else {
+            app.sendError(req, res, err)
+        }
+    })
+};
+
+app.post(path('submit_new_requirement_data/'),new_requirement_form_data);
+
+
+
+
 
 
 

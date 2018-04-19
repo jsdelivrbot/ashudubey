@@ -3,6 +3,7 @@ var app = angular.module('mainSvc', []);
 app.factory('Auth', function ($http, apiSrv, $rootScope) {
     var obj = this;
     obj.IsLogin = function () {
+
         if ($rootScope.user === null || $rootScope.user === undefined)
             return false;
         else {
@@ -134,8 +135,8 @@ app.service('CommonData', function ($http, apiSrv) {
         })
     };
 
-    this.view_user_type = function (callback) {
-        $http.get(apiSrv.path('/api/tickets/get_user_type/')).then(function (resp) {
+    this.view_project_type = function (callback) {
+        $http.get(apiSrv.path('/api/tickets/get_project_type/')).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -152,6 +153,25 @@ app.service('CommonData', function ($http, apiSrv) {
 
     this.submit_data = function (data,callback) {
         $http.post(apiSrv.path('/api/tickets/add_new_forms_data/'),data).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+        })
+    };
+
+
+//new requirement form function
+
+    this.submit = function (data,callback) {
+        $http.post(apiSrv.path('/api/tickets/submit_new_requirement_data/'),data).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -225,6 +245,30 @@ app.service('CommonData', function ($http, apiSrv) {
 
     };
 
+    this.update_priority = function (item, callback) {
+        $http.post(apiSrv.path('/api/tickets/change_priority_type/'),item).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+
+    };
+
+
+
+
+
     this.update_problem_type = function (id,name,callback) {
         $http.put(apiSrv.path('/api/tickets/update_problem_type/?id='+id + '&name=' +name)).then(function (resp) {
             if (resp.data.isError)
@@ -245,8 +289,8 @@ app.service('CommonData', function ($http, apiSrv) {
     };
 
 
-    this.update_user_type = function (id,name,callback) {
-        $http.put(apiSrv.path('/api/tickets/update_user_type/?id='+id + '&name=' +name)).then(function (resp) {
+    this.update_project_type = function (id,name,callback) {
+        $http.put(apiSrv.path('/api/tickets/update_project_type/?id='+id + '&name=' +name)).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -264,8 +308,8 @@ app.service('CommonData', function ($http, apiSrv) {
 
     };
 
-    this.add_new_user_type = function (name, callback) {
-        $http.post(apiSrv.path('/api/tickets/add_new_user_type/?name='+ name)).then(function (resp) {
+    this.add_new_project_type = function (name, callback) {
+        $http.post(apiSrv.path('/api/tickets/add_new_project_type/?name='+ name)).then(function (resp) {
             if (resp.data.isError)
                 callback(resp, null);
             else {
@@ -281,6 +325,27 @@ app.service('CommonData', function ($http, apiSrv) {
 
         })
     };
+
+    this.add_new_problem_type = function (name, callback) {
+        $http.post(apiSrv.path('/api/tickets/add_new_problem_type/?name=' + name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+        })
+
+    };
+
+
+
 
 
 

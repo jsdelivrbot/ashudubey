@@ -83,7 +83,7 @@ md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-ico
 }
 
 md-input-container.md-block {
-    width: 81%;
+    /*width: 81%;*/
     min-width: 250px;
     font-size: 14px;
 }
@@ -220,8 +220,9 @@ li:hover {
 #MyTable {
     width: 90%;
     margin: 12px;
+
 }
-#MyTable, th{
+#MyTable,th{
     font-size: 15px;
     border-bottom: 1px solid lightgrey;
     text-align: center;
@@ -230,7 +231,7 @@ li:hover {
 }
 #MyTable,
 
-tr:nth-child(odd) {background-color: #white;}
+tr:nth-child(odd) {background-color: white;}
 
 #MyTable, td {
     border-bottom: 1px solid lightgrey;

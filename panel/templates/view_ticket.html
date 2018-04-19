@@ -19,6 +19,7 @@
                 <md-button class="md-primary md-raised filterBtn" ng-click="view_ticket_report()" ng-disabled="Loader"
                            style="margin-top: auto;">Submit
                 </md-button>
+                <p3 style="color:red;font-size:16px;min-width: 149px;">{{ErrorMsg}}</p3>
             </div>
 
         </div>
@@ -37,9 +38,11 @@
                 <th>Mobile No.</th>
                 <th>Location</th>
                 <th>Problem Type</th>
-                <th>User Type</th>
-                <th>Description</th>
+                <th>Project</th>
+                <th>Problem Description</th>
                 <th>Remarks</th>
+                <th>status</th>
+
 
             </tr>
 
@@ -54,7 +57,7 @@
                 <td>{{item.user_type}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
-
+                <td>{{item.status}}</td>
             </tr>
             </tbody>
 
@@ -102,10 +105,11 @@
                 <th>Mobile No.</th>
                 <th>Location</th>
                 <th>Problem Type</th>
-                <th>User Type</th>
-                <th>Description</th>
+                <th>Project</th>
+                <th>Problem Description</th>
                 <th>Remarks</th>
                 <th>Status</th>
+                <th>Priority Type</th>
             </tr>
 
             <tbody>
@@ -115,7 +119,7 @@
                 <td>{{item.email}}</td>
                 <td>{{item.mobile}}</td>
                 <td>{{item.location}}</td>
-                <td>{{item.problem_type}}</td>
+                <td>{{item.problem_type[0].toUpperCase()+item.problem_type.substr(1, item.problem_type.length)}}</td>
                 <td>{{item.user_type}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
@@ -124,10 +128,12 @@
                     <span ng-show="showEdit">
                         <select ng-model="item.status" ng-change="showEdit=false;update_data(item)">
                             <option value="pending">Pending</option>
-                            <option value="inprogress">In-Progress</option>
+                            <option value="inprogress">In-Process</option>
+                            <option value="inprogress">Resolved</option>
                         </select>
                     </span>
                 </td>
+                <td>{{item.priority}}</td>
             </tr>
             </tbody>
 

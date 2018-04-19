@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngMaterial', 'ngMessages','ngAnimate',
+var app = angular.module('app', ['ngMaterial', 'ngMessages', 'ngAnimate',
     'ui.filters',
     'ui.router',
     'mainSvc',
@@ -10,7 +10,9 @@ var app = angular.module('app', ['ngMaterial', 'ngMessages','ngAnimate',
     'app.raiseTicket',
     'app.viewTicket',
     'app.problemType',
-    'app.userType'
+    'app.projectType',
+    'app.priorityType',
+    'app.newJoinee'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$locationProvider',
@@ -27,13 +29,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$loca
 
             {'url': '/problem/type', 'state': 'app.problem', 'view': 'problem', 'controller': 'problemCtrl'},
 
-            {'url': '/user/type', 'state': 'app.user', 'view': 'user', 'controller': 'userCtrl'},
+            {'url': '/project/type', 'state': 'app.project', 'view': 'project', 'controller': 'projectCtrl'},
 
             {'url': '/priority/type', 'state': 'app.priority', 'view': 'priority', 'controller': 'priorityCtrl'},
 
-            {'url': '/view/ticket', 'state': 'app.viewticket', 'view': 'view_ticket', 'controller': 'viewCtrl'}
-        ];
+            {'url': '/view/ticket', 'state': 'app.viewticket', 'view': 'view_ticket', 'controller': 'viewCtrl'},
 
+            {'url': '/new/joinee', 'state': 'app.newjoin', 'view': 'new_joinee', 'controller': 'newjoineeCtrl'}
+        ];
 
         $urlRouterProvider.when('', '')
             .otherwise('/home');

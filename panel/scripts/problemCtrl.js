@@ -53,17 +53,45 @@ app.controller('problemCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
         })
     };
 
+
+
     $scope.showAdvanced = function (ev) {
         $mdDialog.show({
             controller: 'problemCtrl',
             templateUrl: 'templates/a.html',
             targetEvent: ev,
+            escapeToClose: false,
+            preserveScope:true,
+            scope: $scope,
             clickOutsideToClose: true
-        }).then(function (answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function () {
-            $scope.status = 'You cancelled the dialog.';
         });
+    };
+
+
+
+    // $scope.showAdvanced = function (ev) {
+    //     $mdDialog.show({
+    //         controller: 'problemCtrl',
+    //         templateUrl: 'templates/a.html',
+    //         targetEvent: ev,
+    //         clickOutsideToClose: true
+    //     }).then(function (answer) {
+    //         $scope.status = 'You said the information was "' + answer + '".';
+    //     }, function () {
+    //         $scope.status = 'You cancelled the dialog.';
+    //     });
+    // };
+
+    $scope.add_new_problem_type = function (item) {
+        CommonData.add_new_problem_type(item.name, function (err, data) {
+            $scope.Loader = false;
+            if (!err) {
+                $mdDialog.hide();
+                alertify.alert('Added successfully');
+                $scope.item={};
+                $scope.view_data.unshift(data);
+            }
+        })
     };
 
 

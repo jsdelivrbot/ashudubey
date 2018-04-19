@@ -31,7 +31,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
     };
 
 
-    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'user_type', 'description', 'remarks']
+    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'user_type', 'description', 'remarks','doc']
     $scope.submit = function () {
         for (x in ValidationArray) {
             if ($scope.emp[ValidationArray[x]] == null || $scope.emp[ValidationArray[x]] == undefined) {
@@ -62,6 +62,40 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
             })
         }
     };
+
+
+
+    $scope.change_input_format = function (model) {
+        $scope.new_model = model;
+        return $scope.$watch('emp.' + model, function (newValue, oldValue, scope) {
+            var month;
+            if (oldValue !== void 0 && oldValue !== null && oldValue !== '' && oldValue !== 'undefined') {
+                if (oldValue.length > newValue.length) {
+                    $scope.emp[model] = '';
+                    $scope.show_date_error = '';
+                } else if ($scope.emp[model].length === 2) {
+                    if ($scope.emp[model] > 0 && $scope.emp[model] < 32) {
+                        $scope.emp[model] = $scope.emp[model] + ['/'];
+                    } else {
+                        $scope.show_date_error = 'Please enter day in correct format';
+                    }
+                } else if ($scope.emp[model].length === 5) {
+                    month = $scope.emp[model].slice(3, 5);
+                    if (month > 0 && month < 13) {
+                        $scope.emp[model] = $scope.emp[model] + '/';
+                    } else {
+                        $scope.show_date_error = 'Please enter month in correct format';
+                    }
+                } else if ($scope.emp[model].length > 10) {
+                    $scope.show_date_error = 'Please enter year in correct format';
+                }
+            }
+        });
+    };
+    
+    
+    
+    
 
 });
 

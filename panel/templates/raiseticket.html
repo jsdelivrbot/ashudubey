@@ -1,3 +1,5 @@
+
+
 <div layout="column" layout-align="center center" md-whiteFrame="8" style="height:100%;" ng-init="get_dropdown_data()">
 
     <div layout="row" layout-align="center center" style="width:100%">
@@ -45,7 +47,7 @@
         </md-input-container>
         <span flex="10"></span>
         <md-input-container class="md-block">
-            <label>User Type</label>
+            <label>Project</label>
             <md-select ng-model="emp.user_type">
                 <md-option ng-repeat="x in dropDown_data[0]"  ng-value="x.id">
                     {{x.name}}
@@ -58,16 +60,25 @@
     <span flex="10"></span>
     <div layout="row" layout-xs="column" layout-padding>
         <md-input-container class="md-block">
-            <label>Description</label>
+            <label>Problem Description</label>
             <input type="text" ng-model="emp.description" ng-blur="camelcase('description')">
         </md-input-container>
         <span flex="10"></span>
         <md-input-container class="md-block">
-            <label>Remarks</label>
+            <label>Job Title/Designation</label>
             <input type="text" ng-model="emp.remarks" ng-blur="camelcase('remarks')">
         </md-input-container>
         <span flex="10"></span>
         <md-input-container class="md-block">
+            <label>Date Of Complaint</label>
+            <input type="text" class="form-control" ng-model="emp.doc"
+                   placeholder="DD/MM/YYYY" ng-focus="show_date_error=''"
+                   ng-change="change_input_format('doc')">
+            <p1 style="color:red;font-size:12px" ng-if="new_model=='doc'">
+                {{show_date_error}}
+            </p1>
+
+
         </md-input-container>
 
     </div>

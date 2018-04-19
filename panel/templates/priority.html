@@ -1,10 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Priority</title>
-</head>
-<body>
-<h1>Priority Type</h1>
-</body>
-</html>
+
+<md-button class="md-primary md-raised" ng-click="ChangeRoute('home')">
+    Back
+</md-button>
+
+<div layout="column" layout-align="center center">
+<h1>Change Priority Type</h1>
+</div>
+
+<div layout="column" layout-align="center center">
+
+    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:80%">
+
+        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:90%;padding:1%">
+            <md-input-container class="md-block">
+                <label>StartDate</label>
+                <md-datepicker ng-model="ticket_report.SDate" md-placeholder="Enter date"
+                               md-open-on-focus></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>EndDate</label>
+                <md-datepicker ng-model="ticket_report.EDate" md-placeholder="Enter date"
+                               md-open-on-focus></md-datepicker>
+            </md-input-container>
+
+
+            <md-button class="md-primary md-raised filterBtn" ng-click="load_ticket_data()">Load</md-button>
+            <!--<md-button class="md-primary md-raised filterBtn" ng-click="export_ticket_data()">Export</md-button>-->
+        </div>
+
+        <div ng-if="Loader" layout layout-align="center center" class="Loader">
+            <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <div>
+            <h3 style="margin-left: 12px">{{NoData}}</h3>
+        </div>
+
+        <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0">
+            <tr>
+                <th>S.NO</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile No.</th>
+                <th>Location</th>
+                <th>Problem Type</th>
+                <th>Project</th>
+                <th>Description</th>
+                <th>Remarks</th>
+                <th>Status</th>
+                <th>Priority Type</th>
+            </tr>
+
+            <tbody>
+            <tr ng-repeat="item in report_data">
+                <td>{{$index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.problem_type}}</td>
+                <td>{{item.user_type}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.remarks}}</td>
+                <td>{{item.status}}</td>
+
+                <!--<td ng-dblclick="showEdit=!showEdit">-->
+                    <!--<span ng-hide="showEdit">{{item.status}}</span>-->
+                    <!--<span ng-show="showEdit">-->
+                        <!--<select ng-model="item.status" ng-change="showEdit=false;update_data(item)">-->
+                            <!--<option value="pending">Pending</option>-->
+                            <!--<option value="inprogress">In-Process</option>-->
+                            <!--<option value="inprogress">Resolved</option>-->
+                        <!--</select>-->
+                    <!--</span>-->
+                <!--</td>-->
+
+                <td ng-dblclick="showEdit=!showEdit">
+                    <span ng-hide="showEdit">{{item.priority}}</span>
+                    <span ng-show="showEdit">
+                        <select ng-model="item.priority" ng-change="showEdit=false;update_priority(item)">
+                            <option value="Not Assigned">Not Assigned</option>
+                            <option value="high">High</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+</div>
