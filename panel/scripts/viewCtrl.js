@@ -26,6 +26,18 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
         })
     };
 
+
+    $scope.update_priority = function (item) {
+        CommonData.update_priority(item,function (err, data) {
+            $scope.Loader = false;
+            if (!err) {
+                console.log(data);
+                alertify.alert('updated successfully');
+
+            }
+        })
+    };
+
     $scope.show_view = false;
     $scope.report_data = [];
 
@@ -65,7 +77,7 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
             if (!err) {
 
                 $scope.report_data = data;
-                console.log(data);
+                console.log(data[0].date);
 
             }
             else {
@@ -81,10 +93,15 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
 
         $scope.Loader = true;
 
-        CommonData.load_ticket_data($scope.ticket_report,function (err,result) {
+        CommonData.load_ticket_data($scope.ticket_report,function (err,data) {
             $scope.Loader = false;
             if(!err){
-                $scope.report_data = data
+
+                delete data[0]._id;
+                delete data[0].date;
+                console.log(data);
+
+                alasql('SELECT * INTO XLSX("It_report.xlsx",{headers:true}) FROM ?', [data]);
 
 
             }

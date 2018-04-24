@@ -48,7 +48,7 @@
         <span flex="10"></span>
         <md-input-container class="md-block">
             <label>Project</label>
-            <md-select ng-model="emp.user_type">
+            <md-select ng-model="emp.project_type">
                 <md-option ng-repeat="x in dropDown_data[0]"  ng-value="x.id">
                     {{x.name}}
                 </md-option>
@@ -72,7 +72,7 @@
         <md-input-container class="md-block">
             <label>Date Of Complaint</label>
             <input type="text" class="form-control" ng-model="emp.doc"
-                   placeholder="DD/MM/YYYY" ng-focus="show_date_error=''"
+                   ng-focus="show_date_error=''"
                    ng-change="change_input_format('doc')">
             <p1 style="color:red;font-size:12px" ng-if="new_model=='doc'">
                 {{show_date_error}}

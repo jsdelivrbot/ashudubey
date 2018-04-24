@@ -13,7 +13,7 @@ const options = {
     port: 465,
     secure: true,
     auth: {
-        user: 'ithelpdesk@v5global.com',
+        user: 'infieldinfotech@gmail.com',
         pass: 'infield@123'
     }
 };
@@ -21,7 +21,7 @@ const transporter = nodeMailer.createTransport(options);
 
 configs.send_mail = function (subject, html, to_mail, cc_mail, callback) {
     transporter.sendMail({
-        from: "ithelpdesk.tech",
+        from: "info@infield.tech",
         to: to_mail,
         cc: cc_mail,
         subject: subject,

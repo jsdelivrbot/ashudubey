@@ -110,8 +110,8 @@ var function_for_add_forms_data = function (req, res) {
     args['date'] = new Date().getTime();
     var rd = new Date().getTime().toString();
     args['ticket_number'] = 'TKT' + rd.substr(7);
-    args['status'] = 'pending';
-    args['priority'] = '';
+    args['status'] = 'Pending';
+    args['priority'] = 'Not Assigned';
     db.mdb.collection('tickets').insert(args, function (err, data) {
         if (!err) {
             var html = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
@@ -227,7 +227,7 @@ app.put(path('update_project_type/'), function (req, res) {
     var name = req.query.name.toLowerCase();
     var name1 = name[0].toUpperCase() + name.substr(1, name.length)
     var id = name;
-    db.mdb.collection('user_type').update(query,
+    db.mdb.collection('project_type').update(query,
         {$set: {id: id, name: name1}}, function (err, result) {
 
             if (!err) {
