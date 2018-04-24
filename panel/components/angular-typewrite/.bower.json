@@ -1,0 +1,38 @@
+{
+  "name": "angular-typewrite",
+  "version": "0.0.15",
+  "dependencies": {
+    "angular": "^1.2.0"
+  },
+  "appPath": "app",
+  "homepage": "https://github.com/antoniocapelo/Angular-Typewrite",
+  "authors": [
+    "antoniocapelo <antonio.c.capelo@gmail.com>"
+  ],
+  "description": "AngularJS directive that simulates the effect of typing on a text editor",
+  "main": [
+    "dist/angular-typewrite.js",
+    "dist/angular-typewrite.css"
+  ],
+  "keywords": [
+    "angularjs",
+    "typewrite",
+    "command-line",
+    "typing"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "*",
+    "!dist/",
+    "!dist/*"
+  ],
+  "_release": "0.0.15",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.15",
+    "commit": "07aa7032cfb53194d390b6cc38b7662f4faea046"
+  },
+  "_source": "https://github.com/antoniocapelo/Angular-Typewrite.git",
+  "_target": "^0.0.15",
+  "_originalSource": "angular-typewrite"
+}

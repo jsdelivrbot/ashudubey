@@ -1,6 +1,6 @@
 .idea/*
 /node_modules/**
 /panel/bower_components/**
-/panel/components/**
+
 /apis/node_modules/**
 
