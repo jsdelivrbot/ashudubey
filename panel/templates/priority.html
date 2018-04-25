@@ -1,11 +1,10 @@
+<div layout="row" layout-align="center center" style="width:100%">
+    <md-button class="md-primary md-raised filterBtn" ng-click="ChangeRoute('home')">Back</md-button>
 
-<md-button class="md-primary md-raised" ng-click="ChangeRoute('home')">
-    Back
-</md-button>
-
-<div layout="column" layout-align="center center">
-<h1>Change Priority Type</h1>
+    <h2 style="padding-left: 35%">Change Priority Type</h2>
+    <span flex></span>
 </div>
+
 <div layout="column" layout-align="center center">
 
     <div layout="column" layout-align="center center" ng-if="isLogined" style="width:80%">
@@ -34,7 +33,8 @@
             <h3 style="margin-left: 12px">{{NoData}}</h3>
         </div>
 
-        <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0">
+        <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0"
+               style="width: 90vw">
             <tr>
                 <th>S.NO</th>
                 <th>Name</th>
@@ -57,21 +57,10 @@
                 <td>{{item.mobile}}</td>
                 <td>{{item.location}}</td>
                 <td>{{item.problem_type}}</td>
-                <td>{{item.user_type}}</td>
+                <td>{{item.project_type}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
                 <td>{{item.status}}</td>
-
-                <!--<td ng-dblclick="showEdit=!showEdit">-->
-                    <!--<span ng-hide="showEdit">{{item.status}}</span>-->
-                    <!--<span ng-show="showEdit">-->
-                        <!--<select ng-model="item.status" ng-change="showEdit=false;update_data(item)">-->
-                            <!--<option value="pending">Pending</option>-->
-                            <!--<option value="inprogress">In-Process</option>-->
-                            <!--<option value="inprogress">Resolved</option>-->
-                        <!--</select>-->
-                    <!--</span>-->
-                <!--</td>-->
 
                 <td ng-dblclick="showEdit=!showEdit">
                     <span ng-hide="showEdit">{{item.priority}}</span>

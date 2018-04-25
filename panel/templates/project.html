@@ -16,7 +16,7 @@
 
     <table id="MyTable" md-whiteframe="2"  ng-if="view_data.length>0">
         <thead>
-        <tr>
+        <tr >
             <th>S.No.</th>
             <th>Project</th>
             <th>Action</th>
@@ -37,7 +37,7 @@
                 <md-button type='button' class="md-primary md-raised filterBtn" ng-hide="isEdit" ng-click="isEdit=true">
                     Edit
                 </md-button>
-                <span ng-show="isEdit">
+                <span ng-show="isEdit" layout="row" layout-align="center center">
                     <md-button type='button' class="md-primary md-raised filterBtn"
                                ng-click="update_project_type(item);isEdit=false">Save</md-button><br>
                 <md-button type='button' class="md-primary md-raised filterBtn"

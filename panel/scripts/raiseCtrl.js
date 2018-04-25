@@ -30,6 +30,11 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
 
     };
 
+    // $scope.Backspace = function(ev){
+    //     console.log('hoiiii')
+    //     if(ev.keyCode===8)
+    //         alert('Backspace')
+    // }
 
     var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project_type', 'description', 'remarks','doc']
     $scope.submit = function () {
@@ -44,7 +49,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
             $scope.Loader = false;
             if (!err) {
                 alertify.alert('Your ticket   '+"<u><b>" + data['ticket_number'] +"</b></u>"+'  has been raised')
-                $scope.emp = {}
+                // $scope.emp = {}
 
             }
             else {

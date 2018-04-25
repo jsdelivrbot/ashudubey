@@ -11,7 +11,7 @@ app.controller('priorityCtrl', function ($scope,Auth,CommonData) {
 
     $scope.emp = {};
     $scope.ticket_report = {
-        SDate: new Date(),
+        SDate: new Date(),  
         EDate: new Date()
     };
 

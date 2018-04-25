@@ -12,7 +12,7 @@
 
         <md-input-container class="md-block">
             <label>Emp Name</label>
-            <input type="text" ng-model="hr.emp_name" ng-blur="camelcase('name')" ng-required="true">
+            <input type="text" ng-model="hr.emp_name" ng-blur="camelcase('emp_name')" ng-required="true">
         </md-input-container>
 
         <md-input-container class="md-block">
@@ -38,7 +38,7 @@
 
         <md-input-container class="md-block">
             <label>Project</label>
-            <md-select ng-model="hr.user_type">
+            <md-select ng-model="hr.project_type">
                 <md-option ng-repeat="x in dropDown_data[0]" ng-value="x.id">
                     {{x.name}}
                 </md-option>

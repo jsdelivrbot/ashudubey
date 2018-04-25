@@ -225,6 +225,25 @@ app.service('CommonData', function ($http, apiSrv) {
     };
 
 
+    this.export_new_data = function (data, callback) {
+        $http.get(apiSrv.path('/api/tickets/get_new_requirement_report/?sdate=' +data.SDate + '&edate=' + data.EDate)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error'
+
+            };
+            callback(res);
+        })
+
+    };
+
+
     this.update_data = function (item, callback) {
         $http.post(apiSrv.path('/api/tickets/change_status/'),item).then(function (resp) {
             if (resp.data.isError)
@@ -345,7 +364,25 @@ app.service('CommonData', function ($http, apiSrv) {
     };
 
 
+    this.load_new_data = function (data, callback) {
+        $http.get(apiSrv.path('/api/tickets/get_new_requirement_report/?sdate='+data.SDate + '&edate=' +data.EDate)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
 
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+
+    };
 
 
 

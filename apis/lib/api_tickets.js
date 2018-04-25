@@ -80,7 +80,7 @@ var sendNotificationSMS = function (args, type, callback) {
     }
 
 
-    var url = 'http://shorteksms.shortekservices.com/pushsms.php?username=innosols&password=hitech8*&message=' + TicketMsg + '&sender=INOSLS&numbers=' + args.mobile;
+    var url = 'http://shorteksms.shortekservices.com/pushsms.php?username=v5global&password=v5global&message=' + TicketMsg + '&sender=V5GLBL&numbers=' + args.mobile;
 
     request({
         uri: url,
@@ -245,7 +245,7 @@ app.put(path('update_project_type/'), function (req, res) {
 app.post(path('add_new_project_type/'), function (req, res) {
 
     var name = req.query.name.toLowerCase();
-    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var name1 = req.query.name
     var obj = {id: name, name: name1};
     console.log(obj);
 
@@ -295,9 +295,10 @@ var new_requirement_form_data = function (req, res) {
     }
     args['date'] = new Date().getTime();
     var rd = new Date().getTime().toString();
-    db.mdb.collection('tickets').insert(args, function (err, data) {
+
+    db.mdb.collection('new_requirement').insert(args, function (err, data) {
         if (!err) {
-            console.log(data);
+            console.log('hiii');
             app.send(req, res, data);
         }
         else {
@@ -307,6 +308,37 @@ var new_requirement_form_data = function (req, res) {
 };
 
 app.post(path('submit_new_requirement_data/'),new_requirement_form_data);
+
+
+
+
+app.get(path('get_new_requirement_report/'), function (req, res) {
+
+    var args = req.query;
+
+    var sdate = new Date(args.sdate).setHours(0, 0, 0, 0);
+    var edate = new Date(args.edate).setHours(23, 0, 0, 0);
+    var query = {'date': {$gte: sdate, $lte: edate}};
+
+    db.mdb.collection('new_requirement').find(query, function (err, data) {
+        if (!err) {
+
+            for(var i=0 ; i<data.length;i++){
+                var temp =''
+                data[i].requirement.forEach(function(item){
+                    console.log(item)
+                    temp += item + " "
+                })
+                data[i].requirement = temp
+            }
+
+            app.send(req, res, data);
+        }
+        else {
+            app.send(req, res, err);
+        }
+    })
+});
 
 
 

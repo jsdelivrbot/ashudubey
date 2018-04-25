@@ -60,17 +60,8 @@
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
                 <td>{{item.doc}}</td>
-                <td ng-dblclick="showEdit=!showEdit">
-                    <span ng-hide="showEdit">{{item.status}}</span>
-                    <span ng-show="showEdit">
-                <select ng-model="item.status" ng-change="showEdit=false;update_data(item)">
-                <option value="Pending">Pending</option>
-                <option value="Inprocess">In-Process</option>
-                <option value="Resolved">Resolved</option>
-                </select>
-                </span>
-                </td>
 
+                <td>{{item.status}}</td>
                 <td>{{item.priority}}</td>
             </tr>
             </tbody>
@@ -85,7 +76,7 @@
 
     <!--Page after Login-->
 
-    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:80%">
+    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:90%">
 
         <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:90%;padding:1%">
             <md-input-container class="md-block">
@@ -103,14 +94,14 @@
             <md-button class="md-primary md-raised filterBtn" ng-click="load_ticket_data()">Load</md-button>
             <md-button class="md-primary md-raised filterBtn" ng-click="export_ticket_data()">Export</md-button>
         </div>
-
+    </div>
         <div ng-if="Loader" layout layout-align="center center" class="Loader">
             <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
         </div>
         <div>
             <h3 style="margin-left: 12px">{{NoData}}</h3>
         </div>
-
+        <div layout="column" layout-align="center center" ng-if="isLogined" style="width:94%">
         <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0">
             <tr>
                 <th>S.NO</th>
@@ -123,8 +114,9 @@
                 <th>Problem Description</th>
                 <th>Job Title/ Designation</th>
                 <th>Date Of Complaint</th>
-                <th>Status</th>
                 <th>Priority Type</th>
+                <th >Status</th>
+
             </tr>
 
             <tbody>
@@ -139,18 +131,18 @@
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
                 <td>{{item.doc}}</td>
-                <td>{{item.status}}</td>
-
+                <td>{{item.priority}}</td>
                 <td ng-dblclick="showEdit=!showEdit">
-                    <span ng-hide="showEdit">{{item.priority}}</span>
+                    <span ng-hide="showEdit">{{item.status}}</span>
                     <span ng-show="showEdit">
-                        <select ng-model="item.priority" ng-change="showEdit=false;update_priority(item)">
-                            <option value="Not Assigned">Not Assigned</option>
-                            <option value="High">High</option>
-                            <option value="Moderate">Moderate</option>
-                             <option value="Low">Low</option>
-                        </select>
-                    </span>
+                <select ng-model="item.status" ng-change="showEdit=false;update_data(item)" >
+                <option value="Pending">Pending</option>
+                <option value="Inprocess">In-Process</option>
+                <option value="Resolved">Resolved</option>
+                    <option value="Not Approved">Not Approved</option>
+
+                </select>
+                </span>
                 </td>
 
 

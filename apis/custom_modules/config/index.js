@@ -13,21 +13,22 @@ const options = {
     port: 465,
     secure: true,
     auth: {
-        user: 'infieldinfotech@gmail.com',
-        pass: 'infield@123'
+        user: 'ithelpdeskv5global@gmail.com',
+        pass: 'Password@123!'
     }
 };
 const transporter = nodeMailer.createTransport(options);
 
 configs.send_mail = function (subject, html, to_mail, cc_mail, callback) {
     transporter.sendMail({
-        from: "info@infield.tech",
+        from: "ITHEPLDESK",
         to: to_mail,
         cc: cc_mail,
         subject: subject,
         html: html
     }, function (error, response) {
         if (error) {
+            console.log(error)
             callback('error');
         }
         else {

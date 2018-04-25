@@ -1,0 +1,77 @@
+<div layout="row" layout-align="center center" style="width:100%">
+    <md-button class="md-primary md-raised filterBtn" ng-click="ChangeRoute('home')">Back</md-button>
+
+    <h2 style="padding-left: 35%">Requirement Report</h2>
+    <span flex></span>
+</div>
+
+<div layout="column" layout-align="center center">
+
+    <div layout="column" layout-align="center center" ng-if="isLogined">
+
+        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width: 80vw">
+            <md-input-container class="md-block">
+                <label>StartDate</label>
+                <md-datepicker ng-model="new_report.SDate" md-placeholder="Enter date"
+                               md-open-on-focus></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>EndDate</label>
+                <md-datepicker ng-model="new_report.EDate" md-placeholder="Enter date"
+                               md-open-on-focus></md-datepicker>
+            </md-input-container>
+
+
+            <md-button class="md-primary md-raised filterBtn" ng-click="load_new_data()">Load</md-button>
+            <md-button class="md-primary md-raised filterBtn" ng-click="export_new_data()">Export</md-button>
+        </div>
+
+        <div ng-if="Loader" layout layout-align="center center" class="Loader">
+            <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <div>
+            <h3 style="margin-left: 12px">{{NoData}}</h3>
+        </div>
+
+        <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="new_requirement.length>0" style="width: 96%">
+            <tr>
+                <th>S.NO</th>
+                <th>Emp Name</th>
+                <th>Emp Code</th>
+                <th>Mobile No.</th>
+                <th>Location</th>
+                <th>Project Type</th>
+                <th>Requirement</th>
+                <th>Date</th>
+                <th>Job Title</th>
+                <th>Gender</th>
+                <th>Vertical</th>
+                <th>Cost Center</th>
+                <th>Reporting Manager</th>
+            </tr>
+
+            <tbody>
+            <tr ng-repeat="item in new_requirement">
+                <td>{{$index+1}}</td>
+                <td>{{item.emp_name}}</td>
+                <td>{{item.emp_code}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.project_type}}</td>
+                <td>{{item.requirement}}</td>
+                <td>{{item.Date}}</td>
+                <td>{{item.job}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.vertical}}</td>
+                <td>{{item.cost_center}}</td>
+                <td>{{item.reporting_manager}}</td>
+
+            </tr>
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+</div>

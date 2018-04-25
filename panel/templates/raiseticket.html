@@ -1,96 +1,98 @@
 
 
-<div layout="column" layout-align="center center" md-whiteFrame="8" style="height:100%;" ng-init="get_dropdown_data()">
+<div layout="column" ng-keyup="Backspace($event)" layout-align="center center" md-whiteFrame="8" style="height:100%;" ng-init="get_dropdown_data()">
 
-    <div layout="row" layout-align="center center" style="width:100%">
+    <div layout="row" layout-align="center center" style="width:100%;margin-top: -11%">
         <md-button class="md-primary md-raised filterBtn" ng-click="ChangeRoute('home')">Back</md-button>
         <span flex></span>
         <h2>Raise Ticket Form</h2>
         <span flex></span>
     </div>
+    <form ng-submit="submit()">
+        <div layout="row" layout-padding layout-xs="column">
 
-    <div layout="row" layout-padding layout-xs="column">
+            <md-input-container class="md-block">
+                <label> Name</label>
+                <input type="text" ng-model="emp.name" ng-blur="camelcase('name')" ng-required="true">
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input type="email" ng-model="emp.email">
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Mobile No.</label>
+                <input limit-to="10" type="number" class="form-control input-lg" ng-required="true" ng-model="emp.mobile"
+                       ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/">
+            </md-input-container>
 
-        <md-input-container class="md-block">
-            <label> Name</label>
-            <input type="text" ng-model="emp.name" ng-blur="camelcase('name')" ng-required="true">
-        </md-input-container>
+        </div>
+
         <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Email</label>
-            <input type="email" ng-model="emp.email">
-        </md-input-container>
+
+        <div layout="row" layout-xs="column" layout-padding>
+            <md-input-container class="md-block">
+                <label>Location</label>
+                <input type="text" ng-model="emp.location" ng-blur="camelcase('location')">
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Problem Type</label>
+                <md-select ng-model="emp.problem_type">
+                    <md-option ng-repeat="x in dropDown_data[1]" ng-value="x.id">
+                        {{x.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Project</label>
+                <md-select ng-model="emp.project_type">
+                    <md-option ng-repeat="x in dropDown_data[0]"  ng-value="x.id">
+                        {{x.name}}
+                    </md-option>
+
+
+                </md-select>
+            </md-input-container>
+        </div>
         <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Mobile No.</label>
-            <input limit-to="10" type="number" class="form-control input-lg" ng-required="true" ng-model="emp.mobile"
-                   ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/">
-        </md-input-container>
+        <div layout="row" layout-xs="column" layout-padding>
+            <md-input-container class="md-block">
+                <label>Problem Description</label>
+                <input type="text" ng-model="emp.description" ng-blur="camelcase('description')">
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Job Title/Designation</label>
+                <input type="text" ng-model="emp.remarks" ng-blur="camelcase('remarks')">
+            </md-input-container>
+            <span flex="10"></span>
+            <md-input-container class="md-block">
+                <label>Date Of Complaint</label>
+                <input type="text" class="form-control" ng-model="emp.doc"
+                       ng-focus="show_date_error=''"
+                       ng-change="change_input_format('doc')">
+                <p1 style="color:red;font-size:12px" ng-if="new_model=='doc'">
+                    {{show_date_error}}
+                </p1>
 
-    </div>
 
-    <span flex="10"></span>
+            </md-input-container>
 
-    <div layout="row" layout-xs="column" layout-padding>
-        <md-input-container class="md-block">
-            <label>Location</label>
-            <input type="text" ng-model="emp.location" ng-blur="camelcase('location')">
-        </md-input-container>
+        </div>
         <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Problem Type</label>
-            <md-select ng-model="emp.problem_type">
-                <md-option ng-repeat="x in dropDown_data[1]" ng-value="x.id">
-                    {{x.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Project</label>
-            <md-select ng-model="emp.project_type">
-                <md-option ng-repeat="x in dropDown_data[0]"  ng-value="x.id">
-                    {{x.name}}
-                </md-option>
+        <div layout="row" layout-xs="column" layout-padding>
+            <md-button type="submit" class="md-primary md-raised filterBtn" ng-click="submit()" ng-disabled="Loader"
+                       style="margin-top: auto;">Submit
+            </md-button>
+            <p3 style="color:red;font-size:16px;min-width: 149px;">{{ErrorMsg}}</p3>
+        </div>
 
+        <div ng-if="Loader" layout layout-align="center center" class="Loader">
+            <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </form>
 
-            </md-select>
-        </md-input-container>
-    </div>
-    <span flex="10"></span>
-    <div layout="row" layout-xs="column" layout-padding>
-        <md-input-container class="md-block">
-            <label>Problem Description</label>
-            <input type="text" ng-model="emp.description" ng-blur="camelcase('description')">
-        </md-input-container>
-        <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Job Title/Designation</label>
-            <input type="text" ng-model="emp.remarks" ng-blur="camelcase('remarks')">
-        </md-input-container>
-        <span flex="10"></span>
-        <md-input-container class="md-block">
-            <label>Date Of Complaint</label>
-            <input type="text" class="form-control" ng-model="emp.doc"
-                   ng-focus="show_date_error=''"
-                   ng-change="change_input_format('doc')">
-            <p1 style="color:red;font-size:12px" ng-if="new_model=='doc'">
-                {{show_date_error}}
-            </p1>
-
-
-        </md-input-container>
-
-    </div>
-    <span flex="10"></span>
-    <div layout="row" layout-xs="column" layout-padding>
-        <md-button class="md-primary md-raised filterBtn" ng-click="submit()" ng-disabled="Loader"
-                   style="margin-top: auto;">Submit
-        </md-button>
-        <p3 style="color:red;font-size:16px;min-width: 149px;">{{ErrorMsg}}</p3>
-    </div>
-
-    <div ng-if="Loader" layout layout-align="center center" class="Loader">
-        <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
-    </div>
 </div>

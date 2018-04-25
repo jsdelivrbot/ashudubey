@@ -41,7 +41,7 @@ app.controller('newjoineeCtrl',function ($scope,CommonData,apiSrv) {
 
 
 
-    var ValidationArray = ['emp_name', 'emp_code', 'mobile', 'location','user_type','requirement', 'Date','job','gender','vertical','cost_center','reporting_manager'];
+    var ValidationArray = ['emp_name', 'emp_code', 'mobile', 'location','project_type','requirement', 'Date','job','gender','vertical','cost_center','reporting_manager'];
 
     $scope.submit_new_requirement_data =function () {
 
@@ -58,6 +58,7 @@ app.controller('newjoineeCtrl',function ($scope,CommonData,apiSrv) {
             if (!err) {
                 console.log(data);
                 alertify.alert('Successfully Submitted');
+                $scope.hr={};
             }
             else {
                 alertify.alert(err.msg)

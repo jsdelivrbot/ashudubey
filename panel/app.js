@@ -12,7 +12,8 @@ var app = angular.module('app', ['ngMaterial', 'ngMessages', 'ngAnimate',
     'app.problemType',
     'app.projectType',
     'app.priorityType',
-    'app.newJoinee'
+    'app.newJoinee',
+    'app.requirementType'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$locationProvider',
@@ -35,7 +36,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$loca
 
             {'url': '/view/ticket', 'state': 'app.viewticket', 'view': 'view_ticket', 'controller': 'viewCtrl'},
 
-            {'url': '/new/joinee', 'state': 'app.newjoin', 'view': 'new_joinee', 'controller': 'newjoineeCtrl'}
+            {'url': '/new/joinee', 'state': 'app.newjoin', 'view': 'new_joinee', 'controller': 'newjoineeCtrl'},
+
+            {'url': '/new/requirement', 'state': 'app.newreq', 'view': 'new_req', 'controller': 'newreqCtrl'}
         ];
 
         $urlRouterProvider.when('', '')

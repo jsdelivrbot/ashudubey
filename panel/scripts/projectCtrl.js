@@ -56,6 +56,12 @@ app.controller('projectCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
 
 
     $scope.add_new_project_type = function (item) {
+        var arr = item.name.split(' ')
+        var temp = ''
+        for(var i=0;i<arr.length;i++){
+            temp += arr[i].charAt(0).toUpperCase() + arr[i].slice(1) + ' '
+        }
+        item.name = temp
         CommonData.add_new_project_type(item.name, function (err, data) {
             $scope.Loader = false;
             if (!err) {
@@ -66,6 +72,18 @@ app.controller('projectCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
             }
         })
     };
+
+        //
+        // $scope.camelcase = function (text) {
+        //     if ($scope.item[text] != undefined && $scope.item[text] != null && $scope.item[text] != "" && $scope.item[text] != "undefined") {
+        //         $scope.item[text] = $scope.item[text].replace(/\w\S*/g, function (txt) {
+        //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        //         })
+        //     }
+        // };
+
+
+
 
 
 });
