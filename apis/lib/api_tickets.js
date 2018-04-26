@@ -73,10 +73,11 @@ var sendNotificationSMS = function (args, type, callback) {
 
     var TicketMsg = '';
     if (type === 'new') {
-        TicketMsg = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
+        TicketMsg = "Thank you for raising request.Your request has been assigned ticket number " + args.ticket_number + " ,and is very important to us.We will process your ticket as quickly as possible. ";
     }
     else {
-        TicketMsg = "The Status Of Your ticket no. " + args.ticket_number + " has been changed to " + args.status;
+        TicketMsg = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
+            "Regards- V5 IT HELPDESK"
     }
 
 
@@ -114,7 +115,7 @@ var function_for_add_forms_data = function (req, res) {
     args['priority'] = 'Not Assigned';
     db.mdb.collection('tickets').insert(args, function (err, data) {
         if (!err) {
-            var html = "Your Ticket No. is   " + args.ticket_number + "  Please remember this for further use";
+            var html = "Thank you for raising request.Your request has been assigned ticket number " + args.ticket_number + " ,and is very important to us.We will process your ticket as quickly as possible. ";
             mailer.send_mail('Raised Ticket Number', html, args.email, CC_MAIL, function () {
                 sendNotificationSMS(args, 'new', function (data) {
                     app.send(req, res, data);
@@ -168,10 +169,11 @@ app.post(path('change_status/'), function (req, res) {
     var args = req.body;
     var query = {"_id": objectid(args._id)};
     db.mdb.collection('tickets').update(query,
-        {$set: {'status':args.status}}, function (err, data) {
+        {$set: {'status': args.status}}, function (err, data) {
             if (!err) {
-                var html = "The Status Of Your ticket no. " + args.ticket_number + " has been changed to " + args.status;
-                mailer.send_mail('Status Of Your Ticket Number', html, args.email, CC_MAIL, function () {
+                var html = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
+                    "Regards- V5 IT HELPDESK"
+                mailer.send_mail('Status Of Your Ticket', html, args.email, CC_MAIL, function () {
                     sendNotificationSMS(args, 'update', function (data) {
                         app.send(req, res, data);
                     })
@@ -185,14 +187,13 @@ app.post(path('change_status/'), function (req, res) {
 });
 
 
-
 app.post(path('change_priority_type/'), function (req, res) {
     var args = req.body;
     var query = {"_id": objectid(args._id)};
     db.mdb.collection('tickets').update(query,
-        {$set: {'priority':args.priority}}, function (err, data) {
+        {$set: {'priority': args.priority}}, function (err, data) {
             if (!err) {
-               app.send(req,res,data);
+                app.send(req, res, data);
             } else {
                 app.sendError(req, res, 'Something Went Wrong', err);
             }
@@ -200,7 +201,6 @@ app.post(path('change_priority_type/'), function (req, res) {
 
         });
 });
-
 
 
 app.put(path('update_problem_type/'), function (req, res) {
@@ -260,23 +260,22 @@ app.post(path('add_new_project_type/'), function (req, res) {
 
 })
 
-app.post(path('add_new_problem_type/'),function (req,res) {
+app.post(path('add_new_problem_type/'), function (req, res) {
 
     var name = req.query.name.toLowerCase();
-    var name1 = name[0].toUpperCase()+name.substr(1,name.length)
-    var obj = {id:name, name:name1};
+    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var obj = {id: name, name: name1};
 
     console.log(obj);
 
-    db.mdb.collection('problem_type').insert(obj,function (err,result) {
-       if(!err){
-           app.send(req,res,result);
-       } else{
-           app.sendError(req,res,'Please Try Again',err)
-       }
+    db.mdb.collection('problem_type').insert(obj, function (err, result) {
+        if (!err) {
+            app.send(req, res, result);
+        } else {
+            app.sendError(req, res, 'Please Try Again', err)
+        }
     });
 })
-
 
 
 // function & Api for submiiting new requirement form data
@@ -307,9 +306,7 @@ var new_requirement_form_data = function (req, res) {
     })
 };
 
-app.post(path('submit_new_requirement_data/'),new_requirement_form_data);
-
-
+app.post(path('submit_new_requirement_data/'), new_requirement_form_data);
 
 
 app.get(path('get_new_requirement_report/'), function (req, res) {
@@ -323,9 +320,9 @@ app.get(path('get_new_requirement_report/'), function (req, res) {
     db.mdb.collection('new_requirement').find(query, function (err, data) {
         if (!err) {
 
-            for(var i=0 ; i<data.length;i++){
-                var temp =''
-                data[i].requirement.forEach(function(item){
+            for (var i = 0; i < data.length; i++) {
+                var temp = ''
+                data[i].requirement.forEach(function (item) {
                     console.log(item)
                     temp += item + " "
                 })

@@ -2,7 +2,7 @@
 
 
     <md-button class="md-primary md-raised" ng-click="ChangeRoute('home')">
-       Back
+        Back
     </md-button>
     <span flex=""></span>
     <md-button class="md-primary md-raised" ng-click="showAdvanced($event);addRow()">
@@ -12,8 +12,7 @@
 </div>
 
 
-
-<div layout="column" style="padding-left: 122px" class="animated slideInLeft">
+<div layout="column" style="padding-left: 122px" class="animated slideInLeft" ng-cloak>
     <table class="table" md-whiteframe="2" id="MyTable" ng-if="view_data.length>0">
         <tr>
             <th>S.No.</th>
@@ -24,16 +23,23 @@
         <tr ng-repeat="item in view_data">
             <td>{{$index+1}}</td>
             <td ng-hide="isEdit">{{item.name}}</td>
-                <td  ng-show="isEdit"><input type="text" ng-model="item.name"></input></td>
-            <td>
-                <md-button type='button' class="md-primary md-raised filterBtn" ng-hide="isEdit" ng-click="isEdit=true">
+            <td ng-show="isEdit">
+                <md-input-container>
+                    <label>Problem</label>
+                    <input type="text" ng-model="item.name" name="name" required>
+                </md-input-container>
+            <td ng-show="!this.isEdit">
+                <md-button type='button' class="md-primary md-raised filterBtn" ng-click="this.isEdit=true">
                     Edit
                 </md-button>
-                <span ng-show="isEdit" layout="row">
-                    <md-button type='button' class="md-primary md-raised filterBtn"
-                               ng-click="update_problem_type(item);isEdit=false">Save</md-button><br>
-                <md-button type='button' class="md-primary md-raised filterBtn"
-                           ng-click="isEdit=false">Cancel</md-button>
+            </td>
+                <td ng-show="this.isEdit">
+
+                <span  layout="row">
+                    <md-button  type='button' class="md-primary md-raised filterBtn"
+                               ng-click="update_problem_type(item,this)">Save</md-button>
+                <md-button  type='button' class="md-primary md-raised filterBtn"
+                           ng-click="this.isEdit=false">Cancel</md-button>
                 </span>
             </td>
         </tr>

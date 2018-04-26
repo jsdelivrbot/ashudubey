@@ -31,6 +31,12 @@ app.controller('projectCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
     }());
 
     $scope.update_project_type = function (item) {
+        var arr = item.name.split(' ')
+        var temp = ''
+        for(var i=0;i<arr.length;i++){
+            temp += arr[i].charAt(0).toUpperCase() + arr[i].slice(1) + ' '
+        }
+        item.name = temp
         CommonData.update_project_type(item._id, item.name, function (err, data) {
             $scope.Loader = false;
             console.log(data)

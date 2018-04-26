@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngMaterial', 'ngMessages', 'ngAnimate',
+var app = angular.module('app', ['ngMaterial', 'ngMessages',
     'ui.filters',
     'ui.router',
     'mainSvc',
