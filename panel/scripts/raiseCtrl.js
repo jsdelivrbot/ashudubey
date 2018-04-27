@@ -36,7 +36,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
     //         alert('Backspace')
     // }
 
-    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project_type', 'description', 'remarks','doc']
+    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project_type', 'description', 'remarks', 'doc']
     $scope.submit = function () {
         for (x in ValidationArray) {
             if ($scope.emp[ValidationArray[x]] == null || $scope.emp[ValidationArray[x]] == undefined) {
@@ -48,8 +48,8 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
         CommonData.submit_data($scope.emp, function (err, data) {
             $scope.Loader = false;
             if (!err) {
-                alertify.alert('Your ticket   '+"<u><b>" + data['ticket_number'] +"</b></u>"+'  has been raised')
-                // $scope.emp = {}
+                alertify.alert('Your ticket   ' + "<u><b>" + data['ticket_number'] + "</b></u>" + '  has been raised')
+                $scope.emp = {}
 
             }
             else {
@@ -67,7 +67,6 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
             })
         }
     };
-
 
 
     $scope.change_input_format = function (model) {
@@ -97,10 +96,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
             }
         });
     };
-    
-    
-    
-    
+
 
 });
 
