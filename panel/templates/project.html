@@ -37,6 +37,13 @@
                 <md-button type='button' class="md-primary md-raised filterBtn" ng-hide="isEdit" ng-click="isEdit=true">
                     Edit
                 </md-button>
+
+
+                <md-button type='button' class="md-primary md-raised filterBtn"
+                           ng-click="delete_project_type(item,$index)">Delete
+                </md-button>
+
+
                 <span ng-show="isEdit" layout="row" layout-align="center center">
                     <md-button type='button' class="md-primary md-raised filterBtn"
                                ng-click="update_project_type(item);isEdit=false">Save</md-button><br>

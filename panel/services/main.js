@@ -189,8 +189,10 @@ app.service('CommonData', function ($http, apiSrv) {
 
     this.view_ticket_report = function (ticket_data,callback) {
         $http.get(apiSrv.path('/api/tickets/get_report_data/?key='+ticket_data)).then(function (resp) {
-            if (resp.data.isError)
-                callback(resp, null);
+            if (resp.data.isError || resp.data.data.length==0) {
+                resp.data.msg = "No Ticket Found";
+                callback(resp.data.msg, null);
+            }
             else {
                 console.log(JSON.stringify(resp));
                 callback(null, resp.data.data);
@@ -306,6 +308,52 @@ app.service('CommonData', function ($http, apiSrv) {
         })
 
     };
+
+
+
+    this.delete_problem_type = function (id,name,callback) {
+        $http.post(apiSrv.path('/api/tickets/delete_problem_type/?id='+id + '&name=' +name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+    };
+
+    this.delete_project_type = function (id,name,callback) {
+        $http.post(apiSrv.path('/api/tickets/delete_problem_type/?id='+id + '&name=' +name)).then(function (resp) {
+            if (resp.data.isError)
+                callback(resp, null);
+            else {
+                callback(null, resp.data.data);
+
+            }
+        }, function (resp) {
+            var res = {
+                'status': false,
+                'msg': 'Internal Server Error!'
+            };
+            callback(res);
+
+        })
+
+    };
+
+
+
+
+
+
 
 
     this.update_project_type = function (id,name,callback) {

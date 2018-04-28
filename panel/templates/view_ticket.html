@@ -7,13 +7,14 @@
     <div ng-if="!isLogined" md-whiteFrame="20" style="width:80%">
         <div layout="column" layout-align="center center">
             <div layout="row" layout-align="center center">
-                <h2> VIEW TICKET FORM </h2>
+                <h2> TICKET STATUS </h2>
                 <span flex></span>
             </div>
+
             <div layout="row" layout-padding layout-xs="column">
                 <md-input-container class="md-block">
                     <label>Ticket No./ Complaint No.</label>
-                    <input type="text" ng-model="emp.ticket_number" ng-blur="camelcase('ticket')" ng-required="true">
+                    <input type="text" ng-model="emp.ticket_number" ng-required="true">
                 </md-input-container>
 
                 <md-button class="md-primary md-raised filterBtn" ng-click="view_ticket_report()" ng-disabled="Loader"
@@ -23,14 +24,11 @@
             </div>
 
         </div>
-        <div ng-if="Loader" layout layout-align="center center" class="Loader">
-            <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
-        </div>
 
     </div>
 
-    <div ng-if="!isLogined" style="width:100%">
-        <table md-whiteframe="20" id="MyTable" class="animated slideInLeft" ng-if="report_data.length>0">
+    <div layout layout-align="center" ng-if="!isLogined" style="width:98%">
+        <table md-whiteframe="20" id="MyTable" ng-class="report_data.length>0?'animated slideInLeft':'animated slideInRight'" ng-show="report_data.length>0">
             <tr>
                 <th>S.NO</th>
                 <th>Name</th>

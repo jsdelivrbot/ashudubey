@@ -72,14 +72,11 @@ app.get(path('get_project_type/'), function (req, res) {
 var sendNotificationSMS = function (args, type, callback) {
 
     var TicketMsg = '';
-    if (type === 'new') {
+    if (type.toLowerCase() === 'new') {
         TicketMsg = "Thank you for raising request.Your request has been assigned ticket number " + args.ticket_number + " ,and is very important to us.We will process your ticket as quickly as possible. ";
     }
-    else {
-        TicketMsg = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
-            "Regards- V5 IT HELPDESK"
-    }
-
+    else
+        TicketMsg = args.msg;
 
     var url = 'http://shorteksms.shortekservices.com/pushsms.php?username=v5global&password=v5global&message=' + TicketMsg + '&sender=V5GLBL&numbers=' + args.mobile;
 
@@ -132,15 +129,37 @@ app.post(path('add_new_forms_data/'), function_for_add_forms_data);
 
 
 var view_report_data = function (req, res) {
-    var query = {'ticket_number': req.query.key};
-    db.mdb.collection('tickets').find(query, function (err, data) {
-        if (!err) {
-            app.send(req, res, data);
+    var tkt = req.query.key
+    var status = false
+
+     if(tkt.length>6){
+        if(tkt.substr(0,3).toLowerCase()!='tkt'){
+            app.sendError(req, res, "Please Enter A Valid Ticket No",{});
         }
         else {
-            app.send(req, res, err);
+            tkt = 'TKT' + tkt.substr(3)
+            status = true
         }
-    })
+    }
+    else if(tkt.length==6){
+        tkt = 'TKT' + tkt
+        status = true
+    }
+    else {
+        app.sendError(req, res, "Please Enter A Valid Ticket No",{});
+    }
+    if(status){
+        var query = {'ticket_number': tkt};
+        db.mdb.collection('tickets').find(query, function (err, data) {
+            if (!err) {
+                app.send(req, res, data);
+            }
+            else {
+                app.sendError(req, res, "Please Enter A Valid Ticket No",err);
+            }
+        })
+    }
+
 
 };
 
@@ -168,13 +187,34 @@ app.get(path('get_raised_ticket_report/'), function (req, res) {
 app.post(path('change_status/'), function (req, res) {
     var args = req.body;
     var query = {"_id": objectid(args._id)};
+    var type = args.status;
+    console.log(type)
+    var TicketMsg = '';
+    if (type.toLowerCase() === 'new') {
+        TicketMsg = "Thank you for raising request.Your request has been assigned ticket number " + args.ticket_number + " ,and is very important to us.We will process your ticket as quickly as possible. ";
+    }
+    else if(type.toLowerCase()==='inprocess'){
+
+        TicketMsg = "Your Ticket is in InProcess and you will get response as soon as possible"
+
+    }
+    else if(type.toLowerCase()==='not approved'){
+
+        TicketMsg = "Your" + args.ticket_number +" has been closed because we have not get an approval from management .Thank you for your time and patience; we hope our services matched your expectations."
+
+    }
+    else {
+        TicketMsg = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
+            "Regards- V5 IT HELPDESK"
+    }
+    console.log(TicketMsg)
+    args.msg = TicketMsg
     db.mdb.collection('tickets').update(query,
         {$set: {'status': args.status}}, function (err, data) {
             if (!err) {
-                var html = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
-                    "Regards- V5 IT HELPDESK"
-                mailer.send_mail('Status Of Your Ticket', html, args.email, CC_MAIL, function () {
-                    sendNotificationSMS(args, 'update', function (data) {
+
+                mailer.send_mail('Status Of Your Ticket',TicketMsg, args.email, CC_MAIL, function () {
+                    sendNotificationSMS(args, args.status, function (data) {
                         app.send(req, res, data);
                     })
                 });
@@ -222,10 +262,46 @@ app.put(path('update_problem_type/'), function (req, res) {
 
 });
 
+app.post(path('delete_problem_type/'), function (req, res) {
+    var query = {
+        "id" : req.query.id
+    };
+    console.log('hiii',query);
+    db.mdb.collection('problem_type').remove(query,function (err, data) {
+            if (err) {
+                app.sendError(req, res, 'Error in deletion');
+            }
+            else {
+                console.log(data)
+                app.send(req, res, data);
+            }
+        })
+
+});
+
+
+app.post(path('delete_project_type/'), function (req, res) {
+    var query = {
+        "id" : req.query.id
+    };
+    console.log('hiii',query);
+    db.mdb.collection('project_type').remove(query,function (err, data) {
+        if (err) {
+            app.sendError(req, res, 'Error in deletion');
+        }
+        else {
+            console.log(data)
+            app.send(req, res, data);
+        }
+    })
+
+});
+
+
 app.put(path('update_project_type/'), function (req, res) {
     var query = {"_id": objectid(req.query.id)};
     var name = req.query.name.toLowerCase();
-    var name1 = name[0].toUpperCase() + name.substr(1, name.length)
+    var name1 = req.query.name
     var id = name;
     db.mdb.collection('project_type').update(query,
         {$set: {id: id, name: name1}}, function (err, result) {

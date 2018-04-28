@@ -60,6 +60,21 @@ app.controller('problemCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
     };
 
 
+    $scope.delete_problem_type = function (item, index) {
+
+        CommonData.delete_problem_type(item.id, item.name, function (err, data) {
+            $scope.Loader = false
+            if (!err) {
+                $scope.view_data.splice(index, 1)
+                alertify.alert('Deleted successfully');
+
+            }
+        })
+
+
+    };
+
+
 
     $scope.showAdvanced = function (ev) {
         $mdDialog.show({

@@ -1,15 +1,15 @@
 <div layout="row" layout-align="center center" style="width:100%">
     <md-button class="md-primary md-raised filterBtn" ng-click="ChangeRoute('home')">Back</md-button>
 
-    <h2 style="padding-left: 35%">Change Priority Type</h2>
+    <h3 style="padding-left: 35%">Change Priority Type</h3>
     <span flex></span>
 </div>
 
-<div layout="column" layout-align="center center">
+<div layout="column" layout-align="center center" style="width: auto">
 
     <div layout="column" layout-align="center center" ng-if="isLogined" style="width:70%;height: 90vm">
 
-        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:90%;padding:1%">
+        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:98%;padding:-1%">
             <md-input-container class="md-block">
                 <label>StartDate</label>
                 <md-datepicker ng-model="ticket_report.SDate" md-placeholder="Enter date"
@@ -33,9 +33,9 @@
             <h3 style="margin-left: 12px">{{NoData}}</h3>
         </div>
 
-        <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0"
-               style="width: 100vw">
-            <tr>
+        <table md-whiteframe="10" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0"
+               style="width: 100%">
+            <tr style="width: 100%">
                 <th>S.NO</th>
                 <th>Name</th>
                 <th>Email</th>

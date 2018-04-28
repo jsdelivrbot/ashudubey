@@ -47,7 +47,8 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
 
 
     $scope.view_ticket_report = function () {
-
+        $scope.report_data = []
+        $scope.ErrorMsg = ''
         for (x in validationArray) {
             if ($scope.emp[validationArray[x]] == null || $scope.emp[validationArray[x]] == undefined) {
                 $scope.ErrorMsg = "Please Enter " + validationArray[x];
@@ -56,12 +57,13 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
         }
         $scope.Loader = true;
         CommonData.view_ticket_report($scope.emp.ticket_number, function (err, data) {
+            $scope.Loader = false;
             if (!err) {
                 $scope.report_data = data;
-                $scope.Loader = false;
+
             }
             else {
-                alert('Some Error');
+                $scope.ErrorMsg = err
             }
         })
 

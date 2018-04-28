@@ -48,6 +48,24 @@ app.controller('projectCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
         })
     };
 
+
+
+    $scope.delete_project_type = function (item, index) {
+
+        CommonData.delete_project_type(item.id, item.name, function (err, data) {
+            $scope.Loader = false
+            if (!err) {
+                $scope.view_data.splice(index, 1)
+                alertify.alert('Deleted successfully');
+
+            }
+        })
+
+
+    };
+
+
+
     $scope.showAdvanced = function (ev) {
         $mdDialog.show({
             controller: 'projectCtrl',
@@ -78,16 +96,6 @@ app.controller('projectCtrl', function ($scope, CommonData, apiSrv, Auth, $mdDia
             }
         })
     };
-
-        //
-        // $scope.camelcase = function (text) {
-        //     if ($scope.item[text] != undefined && $scope.item[text] != null && $scope.item[text] != "" && $scope.item[text] != "undefined") {
-        //         $scope.item[text] = $scope.item[text].replace(/\w\S*/g, function (txt) {
-        //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        //         })
-        //     }
-        // };
-
 
 
 

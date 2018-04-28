@@ -32,13 +32,19 @@
                 <md-button type='button' class="md-primary md-raised filterBtn" ng-click="this.isEdit=true">
                     Edit
                 </md-button>
-            </td>
-                <td ng-show="this.isEdit">
 
-                <span  layout="row">
-                    <md-button  type='button' class="md-primary md-raised filterBtn"
+                <md-button type='button' class="md-primary md-raised filterBtn"
+                           ng-click="delete_problem_type(item,$index)">Delete
+                </md-button>
+
+            </td>
+            <td ng-show="this.isEdit">
+
+                <span layout="row" layout-align="center">
+
+                    <md-button type='button' class="md-primary md-raised filterBtn"
                                ng-click="update_problem_type(item,this)">Save</md-button>
-                <md-button  type='button' class="md-primary md-raised filterBtn"
+                <md-button type='button' class="md-primary md-raised filterBtn"
                            ng-click="this.isEdit=false">Cancel</md-button>
                 </span>
             </td>

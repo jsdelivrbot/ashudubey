@@ -243,7 +243,7 @@ tr:nth-child(odd) {background-color: white;}
 
 .filterBtn {
     height: 36px;
-    margin-top: 27px;
+    /*margin-top: 20px;*/
     padding: 0px;
 }
 
