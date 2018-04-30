@@ -61,6 +61,7 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
             if (!err) {
                 $scope.report_data = data;
 
+
             }
             else {
                 $scope.ErrorMsg = err

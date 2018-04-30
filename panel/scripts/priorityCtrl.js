@@ -4,14 +4,14 @@
 
 var app = angular.module('app.priorityType', []);
 
-app.controller('priorityCtrl', function ($scope,Auth,CommonData) {
+app.controller('priorityCtrl', function ($scope, Auth, CommonData) {
 
     $scope.isLogined = Auth.IsLogin();
     $scope.Loader = false;
 
     $scope.emp = {};
     $scope.ticket_report = {
-        SDate: new Date(),  
+        SDate: new Date(),
         EDate: new Date()
     };
 
@@ -31,20 +31,6 @@ app.controller('priorityCtrl', function ($scope,Auth,CommonData) {
 
     $scope.showEdit = false;
 
-    // $scope.view_ticket_report = function () {
-    //
-    //     $scope.Loader = true;
-    //     CommonData.view_ticket_report($scope.emp.ticket_number, function (err, data) {
-    //         if (!err) {
-    //             $scope.report_data = data;
-    //         }
-    //         else {
-    //             alert('Some Error');
-    //         }
-    //     })
-    //
-    // };
-
 
     $scope.load_ticket_data = function () {
         $scope.Loader = true;
@@ -53,6 +39,7 @@ app.controller('priorityCtrl', function ($scope,Auth,CommonData) {
             if (!err) {
 
                 $scope.report_data = data;
+
 
             }
             else {

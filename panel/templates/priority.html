@@ -5,11 +5,11 @@
     <span flex></span>
 </div>
 
-<div layout="column" layout-align="center center" style="width: auto">
+<div layout="column" layout-align="center center">
 
-    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:70%;height: 90vm">
+    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:100%">
 
-        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:98%;padding:-1%">
+        <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:70%">
             <md-input-container class="md-block">
                 <label>StartDate</label>
                 <md-datepicker ng-model="ticket_report.SDate" md-placeholder="Enter date"
@@ -26,15 +26,12 @@
             <!--<md-button class="md-primary md-raised filterBtn" ng-click="export_ticket_data()">Export</md-button>-->
         </div>
 
-        <div ng-if="Loader" layout layout-align="center center" class="Loader">
-            <md-progress-circular md-diameter="50" md-mode="indeterminate"></md-progress-circular>
-        </div>
         <div>
             <h3 style="margin-left: 12px">{{NoData}}</h3>
         </div>
 
         <table md-whiteframe="10" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0"
-               style="width: 100%">
+               style="width: 90%">
             <tr style="width: 100%">
                 <th>S.NO</th>
                 <th>Name</th>

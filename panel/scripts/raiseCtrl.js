@@ -30,11 +30,6 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
 
     };
 
-    // $scope.Backspace = function(ev){
-    //     console.log('hoiiii')
-    //     if(ev.keyCode===8)
-    //         alert('Backspace')
-    // }
 
     var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project_type', 'description', 'remarks', 'doc']
     $scope.submit = function () {
