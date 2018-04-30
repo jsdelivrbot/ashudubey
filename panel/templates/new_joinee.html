@@ -38,7 +38,7 @@
 
         <md-input-container class="md-block">
             <label>Project</label>
-            <md-select ng-model="hr.project_type">
+            <md-select ng-model="hr.project">
                 <md-option ng-repeat="x in dropDown_data[0]" ng-value="x.id">
                     {{x.name}}
                 </md-option>
@@ -93,12 +93,12 @@
 
         <md-input-container class="md-block">
             <label>Vertical</label>
-            <input type="text" ng-model="hr.vertical" ng-blur="camelcase('doj')">
+            <input type="text" ng-model="hr.vertical" ng-blur="camelcase('vertical')">
         </md-input-container>
 
         <md-input-container class="md-block">
             <label>Cost Center</label>
-            <input type="text" ng-model="hr.cost_center" ng-blur="camelcase('remarks')">
+            <input type="text" ng-model="hr.cost_center" ng-blur="camelcase('cost_center')">
         </md-input-container>
 
         <md-input-container class="md-block">

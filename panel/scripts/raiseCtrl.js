@@ -31,7 +31,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
     };
 
 
-    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project_type', 'description', 'remarks', 'doc']
+    var ValidationArray = ['name', 'email', 'mobile', 'location', 'problem_type', 'project', 'description', 'remarks', 'doc']
     $scope.submit = function () {
         for (x in ValidationArray) {
             if ($scope.emp[ValidationArray[x]] == null || $scope.emp[ValidationArray[x]] == undefined) {

@@ -21,7 +21,7 @@ const transporter = nodeMailer.createTransport(options);
 
 configs.send_mail = function (subject, html, to_mail, cc_mail, callback) {
     transporter.sendMail({
-        from: "ITHEPLDESK",
+        from: '"V5 IT HEPLDESK" ithelpdeskv5global@gmail.com',
         to: to_mail,
         cc: cc_mail,
         subject: subject,

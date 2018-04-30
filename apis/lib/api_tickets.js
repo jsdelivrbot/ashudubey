@@ -173,7 +173,7 @@ app.get(path('get_raised_ticket_report/'), function (req, res) {
     var edate = new Date(args.edate).setHours(23, 0, 0, 0);
     var query = {'date': {$gte: sdate, $lte: edate}};
 
-    db.mdb.collection('tickets').find(query, function (err, data) {
+    db.mdb.collection('tickets').find(query).sort({"date":-1}, function (err, data) {
         if (!err) {
             app.send(req, res, data);
         }
@@ -191,20 +191,20 @@ app.post(path('change_status/'), function (req, res) {
     console.log(type)
     var TicketMsg = '';
     if (type.toLowerCase() === 'new') {
-        TicketMsg = "Thank you for raising request.Your request has been assigned ticket number " + args.ticket_number + " ,and is very important to us.We will process your ticket as quickly as possible. ";
+        TicketMsg = "Thank you for raising request.Your request has been assigned a ticket number " + args.ticket_number + "  is very important to us.We will process your ticket as quickly as possible." + " "+ "V5 IT HELPDESK";
     }
     else if(type.toLowerCase()==='inprocess'){
 
-        TicketMsg = "Your Ticket is in InProcess and you will get response as soon as possible"
+        TicketMsg = "Your Ticket is  InProcess and we are working on the same.You will get a response as soon as possible." + " " + "V5 IT HELPDESK"
 
     }
     else if(type.toLowerCase()==='not approved'){
 
-        TicketMsg = "Your" + args.ticket_number +" has been closed because we have not get an approval from management .Thank you for your time and patience; we hope our services matched your expectations."
+        TicketMsg = "Your" + args.ticket_number +" has been closed because we have not get an approval on your request.Thank You for your time and patience; We hope our services matched your expectations." + " " + " V5 IT HELPDESK "
 
     }
     else {
-        TicketMsg = "Your " + args.ticket_number + "  has been resolved successfully,We have completed work on your request. Thank you for your time and patience.We hope our services matched your expectations." +" "+
+        TicketMsg = "Your " + args.ticket_number + "  has been resolved successfully.We have completed work on your request. Thank You for your time and patience.We value your feedback,Please send an email to unmukt@v5global.com for feedback so we can further improve and enhance our processes." + " " + " V5 IT HELPDESK "
             "Regards- V5 IT HELPDESK"
     }
     console.log(TicketMsg)
@@ -393,14 +393,14 @@ app.get(path('get_new_requirement_report/'), function (req, res) {
     var edate = new Date(args.edate).setHours(23, 0, 0, 0);
     var query = {'date': {$gte: sdate, $lte: edate}};
 
-    db.mdb.collection('new_requirement').find(query, function (err, data) {
+    db.mdb.collection('new_requirement').find(query).sort({"date":-1}, function (err, data) {
         if (!err) {
 
             for (var i = 0; i < data.length; i++) {
                 var temp = ''
                 data[i].requirement.forEach(function (item) {
                     console.log(item)
-                    temp += item + " "
+                    temp += item + ", "
                 })
                 data[i].requirement = temp
             }

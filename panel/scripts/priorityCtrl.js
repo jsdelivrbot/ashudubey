@@ -39,16 +39,12 @@ app.controller('priorityCtrl', function ($scope, Auth, CommonData) {
             if (!err) {
 
                 $scope.report_data = data;
-
-
             }
             else {
                 alertify.alert(err.msg)
 
             }
         })
-
-
     }
 
     $scope.load_ticket_data();

@@ -88,9 +88,13 @@ app.controller('viewCtrl', function ($scope, CommonData, apiSrv, Auth) {
 
             }
         })
-
-
     }
+
+    if($scope.isLogined)
+        $scope.load_ticket_data();
+
+
+
 
     $scope.export_ticket_data = function () {
 

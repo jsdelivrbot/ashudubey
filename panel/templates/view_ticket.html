@@ -2,7 +2,8 @@
     Back
 </md-button>
 
-<div layout="column" layout-align="center center" style="margin-top: -3%">
+
+<div layout="column" layout-align="center center">
 
     <div ng-if="!isLogined" md-whiteFrame="20" style="width:80%">
         <div layout="column" layout-align="center center">
@@ -56,7 +57,7 @@
                 <td>{{item.mobile}}</td>
                 <td>{{item.location}}</td>
                 <td>{{item.problem_type}}</td>
-                <td>{{item.project_type}}</td>
+                <td>{{item.project}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
                 <td>{{item.doc}}</td>
@@ -76,9 +77,11 @@
 
     <!--Page after Login-->
 
-    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:70%;padding-top:2%" >
+
+    <div layout="column" layout-align="center center" ng-if="isLogined" style="width:70%" >
 
         <div layout="row" layout-xs="column" md-whiteFrame="60" style="width:90%">
+
             <md-input-container class="md-block">
                 <label>StartDate</label>
                 <md-datepicker ng-model="ticket_report.SDate" md-placeholder="Enter date"
@@ -107,6 +110,7 @@
                 <th>S.NO</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Ticket No.</th>
                 <th>Mobile No.</th>
                 <th>Location</th>
                 <th>Problem Type</th>
@@ -124,10 +128,11 @@
                 <td>{{$index+1}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.email}}</td>
+                <td>{{item.ticket_number}}</td>
                 <td>{{item.mobile}}</td>
                 <td>{{item.location}}</td>
                 <td>{{item.problem_type[0].toUpperCase()+item.problem_type.substr(1, item.problem_type.length)}}</td>
-                <td>{{item.project_type}}</td>
+                <td>{{item.project}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.remarks}}</td>
                 <td>{{item.doc}}</td>
