@@ -26,7 +26,7 @@ app.controller('newreqCtrl', function ($scope,Auth,CommonData,apiSrv) {
             $scope.Loader = false;
             if (!err) {
 
-                $scope.new_requirement = data;
+                $scope.new_requirement = data.reverse();
 
             }
             else {

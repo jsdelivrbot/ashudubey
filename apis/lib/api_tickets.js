@@ -392,19 +392,19 @@ app.get(path('get_new_requirement_report/'), function (req, res) {
     var sdate = new Date(args.sdate).setHours(0, 0, 0, 0);
     var edate = new Date(args.edate).setHours(23, 0, 0, 0);
     var query = {'date': {$gte: sdate, $lte: edate}};
+    console.log('hhghgh',query);
 
-    db.mdb.collection('new_requirement').find(query).sort({"date":-1}, function (err, data) {
+    db.mdb.collection('new_requirement').find(query, function (err, data) {
         if (!err) {
-
             for (var i = 0; i < data.length; i++) {
-                var temp = ''
+                var temp = '';
                 data[i].requirement.forEach(function (item) {
-                    console.log(item)
+                    console.log(item);
                     temp += item + ", "
-                })
+                });
                 data[i].requirement = temp
             }
-
+            console.log(data);
             app.send(req, res, data);
         }
         else {

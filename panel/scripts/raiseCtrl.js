@@ -44,7 +44,7 @@ app.controller('raiseCtrl', function ($scope, CommonData, apiSrv) {
             $scope.Loader = false;
             if (!err) {
                 alertify.alert('Your ticket   ' + "<u><b>" + data['ticket_number'] + "</b></u>" + '  has been raised')
-                $scope.emp = {}
+                $scope.emp = {};
 
             }
             else {

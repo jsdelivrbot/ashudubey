@@ -59,6 +59,7 @@ app.controller('newjoineeCtrl',function ($scope,CommonData,apiSrv) {
                 console.log(data);
                 alertify.alert('Successfully Submitted');
                 $scope.hr={};
+
             }
             else {
                 alertify.alert(err.msg)
