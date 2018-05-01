@@ -79,7 +79,7 @@ md-content {
 }
 
 md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
-    background-color: darkcyan;
+    background-color: lightgreen;
 }
 
 md-input-container.md-block {

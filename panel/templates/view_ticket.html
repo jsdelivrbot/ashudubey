@@ -106,7 +106,7 @@
     </div>
     <div layout="column" layout-align="center center" ng-if="isLogined" style="width:94%">
         <table md-whiteframe="20" id="downTable" class="animated slideInLeft" ng-if="report_data.length>0">
-            <tr>
+            <tr style="color:white">
                 <th>S.NO</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -124,7 +124,7 @@
             </tr>
 
             <tbody>
-            <tr ng-repeat="item in report_data">
+            <tr ng-repeat="item in report_data | orderBy:'status'" ng-style="{ 'background' : (item.status == 'Resolved') ? 'lightgreen' : ''}">
                 <td>{{$index+1}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.email}}</td>
