@@ -56,7 +56,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$loca
                 templateUrl: 'templates/toolbar.html',
                 controller: 'toolbarCtrl'
             });
-        for (var x in routes) {
+
+            for (var x in routes) {
             $stateProvider.state(routes[x].state, {
                 url: routes[x].url,
                 views: {
