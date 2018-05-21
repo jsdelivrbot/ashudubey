@@ -2,6 +2,6 @@
 /node_modules/**
 /panel/bower_components/**
 
-/apis/node_modules/**
-/apis/custom_modules/**
+./apis/node_modules/**
+./apis/custom_modules/**
 
